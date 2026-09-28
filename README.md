@@ -35,11 +35,13 @@ En cada bloque se trabaja con un dataset distinto, para ver problemas y dominios
 
 **0.1 Herramientas del curso**
 
-- `0.1.1` Git y GitHub: repositorios, commits, ramas y pull requests
-- `0.1.2` VS Code: extensiones y configuración
-- `0.1.3` Terminal básica
-- `0.1.4` Markdown para documentar
-- `0.1.5` Instalación: Python (entornos virtuales), PostgreSQL y pgAdmin
+- `0.1.1` [Terminal básica](Bloque%200%20-%20Preparación/0.1.1%20-%20Terminal%20básica.md)
+- `0.1.2` [Git y GitHub: repositorios, commits, ramas y pull requests](Bloque%200%20-%20Preparación/0.1.2%20-%20Git%20y%20GitHub.md)
+- `0.1.3` [VS Code: extensiones y configuración](Bloque%200%20-%20Preparación/0.1.3%20-%20VS%20Code.md)
+- `0.1.4` [Markdown para documentar](Bloque%200%20-%20Preparación/0.1.4%20-%20Markdown%20para%20documentar.md)
+- `0.1.5` [Instalación: Python (entornos virtuales), PostgreSQL y pgAdmin](Bloque%200%20-%20Preparación/0.1.5%20-%20Instalación%20de%20Python,%20PostgreSQL%20y%20pgAdmin.md)
+
+A lo largo del bloque, cada alumno construye su repositorio `mi-portfolio-data-analytics`, que usará para entregar las prácticas del curso.
 
 ---
 
