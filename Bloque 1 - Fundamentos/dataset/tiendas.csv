@@ -1,0 +1,5 @@
+tienda_id,nombre,ciudad,tipo_ubicacion,fecha_apertura,superficie_m2,plazas_sentado
+MAD,Lumen Sol,Madrid,Calle comercial,2019-03-15,120,40
+BCN,Lumen Gràcia,Barcelona,Barrio residencial,2021-06-01,95,32
+VLC,Lumen Campus,Valencia,Campus universitario,2022-09-12,150,60
+SVQ,Lumen Santa Justa,Sevilla,Estación de tren,2023-11-20,70,12

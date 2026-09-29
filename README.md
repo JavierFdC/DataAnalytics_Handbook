@@ -29,6 +29,8 @@ En cada bloque se trabaja con un dataset distinto, para ver problemas y dominios
 
 ---
 
+<a id="bloque-0--preparacion"></a>
+
 ## Bloque 0 — Preparación
 
 *Preparación de entornos previo al curso. Contenidos que se dan por conocidos desde la primera sesión.*
@@ -49,9 +51,11 @@ A lo largo del bloque, cada alumno construye su repositorio `mi-portfolio-data-a
 
 **1.1 Fundamentos**
 
-- `1.1.1` Presentación del curso: ecosistema y ciclo de vida del dato
-- `1.1.2` Variables, dimensiones, medidas y KPIs
-- `1.1.3` Tipos de análisis: descriptivo, diagnóstico, predictivo y prescriptivo
+- `1.1.1` [Presentación del curso: ecosistema y ciclo de vida del dato](Bloque%201%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md)
+- `1.1.2` [Variables, dimensiones, medidas y KPIs](Bloque%201%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md)
+- `1.1.3` [Tipos de análisis: descriptivo, diagnóstico, predictivo y prescriptivo](Bloque%201%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md)
+
+Caso del bloque: **Café Lumen**, una cadena de cuatro cafeterías, con sus ventas del primer semestre de 2025 ([`dataset/`](Bloque%201%20-%20Fundamentos/dataset/)).
 
 ---
 
@@ -249,6 +253,7 @@ Proyecto individual que se desarrolla de forma autónoma, fuera de las sesiones.
 
 *Información adicional para el alumno. No forma parte de las sesiones ni de la evaluación del curso.*
 
+- **[Glosario](recursos/Glosario.md)**: definiciones breves de los términos del curso, agrupadas por bloque y con enlace a la sesión donde se explica cada uno. Crece a medida que avanza el curso.
 - **[Certificaciones profesionales](recursos/Certificaciones%20profesionales.md)**: las certificaciones oficiales del mercado que se corresponden con cada bloque del curso (SQL, Python, cloud, IA, gobierno del dato, Power BI, Tableau y Qlik). Incluye precios, formato del examen, vigencia y el orden recomendado para certificarse.
 
 ---
@@ -272,7 +277,7 @@ data-analytics-handbook/
 ├── README.md
 ├── recursos/                               ← glosario, guías de instalación, cheatsheets, certificaciones
 ├── Bloque 0 - Preparación/
-├── Bloque 1 - Fundamentos/
+├── Bloque 1 - Fundamentos/                dataset/
 ├── Bloque 2 - SQL/                        scripts/  data/
 ├── Bloque 3 - Python/                     notebooks/  data/
 ├── Bloque 4 - Algoritmos e IA/            notebooks/  data/

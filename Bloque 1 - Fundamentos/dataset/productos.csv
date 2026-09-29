@@ -1,0 +1,23 @@
+producto_id,producto,categoria,precio_venta,coste_unitario
+P01,Espresso,Café,1.40,0.30
+P02,Americano,Café,1.80,0.35
+P03,Café con leche,Café,2.00,0.45
+P04,Cappuccino,Café,2.60,0.55
+P05,Flat white,Café,3.00,0.65
+P06,Latte de avena,Café,3.20,0.80
+P07,Té verde,Té e infusiones,2.20,0.30
+P08,Chai latte,Té e infusiones,3.30,0.85
+P09,Infusión de manzanilla,Té e infusiones,2.00,0.25
+P10,Cold brew,Bebidas frías,3.50,0.70
+P11,Iced latte,Bebidas frías,3.40,0.75
+P12,Limonada,Bebidas frías,2.90,0.60
+P13,Zumo de naranja,Bebidas frías,3.20,1.00
+P14,Croissant,Bollería,1.80,0.45
+P15,Napolitana de chocolate,Bollería,2.10,0.55
+P16,Magdalena,Bollería,1.50,0.35
+P17,Tarta de zanahoria,Bollería,3.80,1.10
+P18,Cookie,Bollería,2.20,0.50
+P19,Tostada con tomate,Salado,2.80,0.70
+P20,Bocadillo de jamón,Salado,4.50,1.60
+P21,Sándwich vegetal,Salado,4.20,1.40
+P22,Quiche de verduras,Salado,4.80,1.70
