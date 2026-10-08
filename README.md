@@ -63,15 +63,17 @@ Caso del bloque: **Café Lumen**, una cadena de cuatro cafeterías, con sus vent
 
 **2.1 Consultas básicas**
 
-- `2.1.1` Modelo relacional, PostgreSQL y pgAdmin. SELECT, FROM, WHERE y AS
-- `2.1.2` Agregaciones, agrupación y ordenación (GROUP BY, HAVING, ORDER BY)
-- `2.1.3` JOINs y teoría de conjuntos
+- `2.1.1` [Modelo relacional, PostgreSQL y pgAdmin. SELECT, FROM, WHERE y AS](Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20PostgreSQL%20y%20pgAdmin.%20SELECT,%20FROM,%20WHERE%20y%20AS.md)
+- `2.1.2` [Agregaciones, agrupación y ordenación (GROUP BY, HAVING, ORDER BY)](Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md)
+- `2.1.3` [JOINs y teoría de conjuntos](Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md)
 
 **2.2 SQL intermedio**
 
 - `2.2.1` Subconsultas
 - `2.2.2` Vistas y CTEs
 - `2.2.3` Funciones de ventana y práctica guiada
+
+Caso del bloque: **Casa Olivo**, una tienda online de artículos para el hogar, con su base de datos desde la apertura (marzo de 2024) hasta diciembre de 2025, en dos scripts SQL ([`dataset/`](Bloque%202%20-%20SQL/dataset/)).
 
 ---
 
@@ -278,7 +280,7 @@ data-analytics-handbook/
 ├── recursos/                               ← glosario, guías de instalación, cheatsheets, certificaciones
 ├── Bloque 0 - Preparación/
 ├── Bloque 1 - Fundamentos/                dataset/
-├── Bloque 2 - SQL/                        scripts/  data/
+├── Bloque 2 - SQL/                        dataset/
 ├── Bloque 3 - Python/                     notebooks/  data/
 ├── Bloque 4 - Algoritmos e IA/            notebooks/  data/
 ├── Bloque 5 - Arquitectura y gobierno/

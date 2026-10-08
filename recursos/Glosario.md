@@ -261,6 +261,58 @@
 
 ---
 
+## Bloque 2 — SQL y bases de datos
+
+**Alias.** Nombre alternativo que se da a una columna del resultado (`AS margen_pct`) o a una tabla dentro de una consulta (`FROM pedidos p`). No cambia la tabla: solo existe en la consulta. · [2.1.1], [2.1.3]
+
+**Anti-join.** Patrón para encontrar las filas de una tabla que no tienen pareja en otra: `LEFT JOIN` seguido de `WHERE <clave de la derecha> IS NULL`. Por ejemplo, los clientes que nunca han hecho un pedido. · [2.1.3]
+
+**Cardinalidad, trampa de la.** Error por el que un JOIN uno a muchos repite las filas del lado "uno" y hace que se sumen varias veces sus medidas. Se evita sumando las medidas de la tabla más detallada o con `COUNT(DISTINCT ...)`. · [2.1.3]
+
+**Clave compuesta.** Clave primaria formada por varias columnas, porque ninguna sola identifica cada fila. En `lineas_pedido` es `pedido_id` + `num_linea`. · [2.1.1]
+
+**Clave foránea** (*foreign key*). Columna que apunta a la clave primaria de otra tabla, como `productos.categoria_id` hacia `categorias`. La base de datos impide que apunte a una fila que no existe. · [2.1.1]
+
+**DDL y DML.** Familias de instrucciones de SQL. **DDL** (*Data Definition Language*) define la estructura: `CREATE`, `ALTER`, `DROP`. **DML** (*Data Manipulation Language*) cambia los datos: `INSERT`, `UPDATE`, `DELETE`. Las consultas con `SELECT` se agrupan a veces como **DQL**. · [2.1.1]
+
+**Diagrama entidad-relación** (ER). Dibujo de las tablas de una base de datos, sus columnas y las relaciones entre ellas a través de las claves. · [2.1.1]
+
+**DISTINCT.** Palabra clave que elimina las filas repetidas de un resultado (`SELECT DISTINCT provincia`) o cuenta valores distintos (`COUNT(DISTINCT cliente_id)`). · [2.1.1], [2.1.2]
+
+**Función de agregación.** Función que resume muchas filas en un solo valor: `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`. Todas ignoran los `NULL`, salvo `COUNT(*)`. · [2.1.2]
+
+**GROUP BY.** Cláusula que reparte las filas en grupos según el valor de una o varias columnas, para calcular una agregación por grupo. Cada columna del `SELECT` debe estar en el `GROUP BY` o dentro de una agregación. · [2.1.2]
+
+**HAVING.** Cláusula que filtra grupos después de agrupar, y por eso admite agregaciones: `HAVING COUNT(*) >= 5`. `WHERE` filtra filas antes de agrupar. · [2.1.2]
+
+**Índice.** Estructura auxiliar que permite a la base de datos encontrar filas sin recorrer toda la tabla, como el índice de un libro. Las claves primarias tienen uno automáticamente. · [2.1.3]
+
+**Integridad referencial.** Garantía de que ninguna clave foránea apunta a una fila inexistente. La base de datos la hace cumplir al insertar, modificar o borrar. · [2.1.1]
+
+**JOIN.** Operación que combina las filas de dos tablas que se corresponden según una condición, normalmente la igualdad entre una clave foránea y una clave primaria. **INNER** devuelve solo las filas con pareja; **LEFT** conserva todas las de la izquierda; **RIGHT**, todas las de la derecha; **FULL**, todas las de ambas; **CROSS** combina todas con todas, sin condición. · [2.1.3]
+
+**Modelo relacional.** Forma de organizar los datos en tablas sobre un único tipo de cosa, relacionadas mediante claves, de modo que cada dato se guarda una sola vez. Lo propuso Edgar F. Codd en 1970. · [2.1.1]
+
+**Normalización.** Proceso de repartir los datos en tablas para eliminar repeticiones, descrito por las formas normales. La operación contraria, **desnormalizar**, se hace a propósito en los extractos y los modelos analíticos para leer más deprisa. · [2.1.1]
+
+**NULL.** Marca de valor ausente o desconocido: no es cero ni un texto vacío. Cualquier comparación con `NULL` da "desconocido", por lo que se pregunta por él con `IS NULL` o `IS NOT NULL`. · [2.1.1]
+
+**Operaciones de conjuntos.** Combinan los resultados de dos consultas con la misma forma, uno debajo de otro. `UNION` une sin duplicados, `UNION ALL` une con duplicados, `INTERSECT` devuelve lo común y `EXCEPT` lo que está en la primera y no en la segunda. · [2.1.3]
+
+**Orden lógico de ejecución.** Orden en que la base de datos procesa las cláusulas de una consulta, distinto del orden en que se escriben: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. Explica, por ejemplo, por qué un alias no se puede usar en el `WHERE`. · [2.1.1], [2.1.2]
+
+**Plan de ejecución.** Secuencia de operaciones que el planificador de la base de datos elige para resolver una consulta (recorrer tablas, usar índices, estrategias de JOIN). Se consulta con `EXPLAIN`. · [2.1.3]
+
+**Relación uno a muchos y muchos a muchos.** En una relación **uno a muchos** (1:N), cada fila de una tabla se relaciona con varias de otra: un cliente hace muchos pedidos. Una relación **muchos a muchos** (N:M), como pedidos y productos, se resuelve con una **tabla intermedia** (`lineas_pedido`) con una clave foránea hacia cada lado. · [2.1.1]
+
+**SQL** (*Structured Query Language*). Lenguaje estándar para definir, modificar y consultar bases de datos relacionales. Es declarativo: se indica qué se quiere obtener y la base de datos decide cómo. Cada sistema habla un **dialecto** con funciones propias. · [2.1.1]
+
+**Tipo de datos.** Clase de valores que admite una columna (`INTEGER`, `NUMERIC`, `VARCHAR`, `DATE`, `BOOLEAN`). La base de datos rechaza los valores que no encajan. Para dinero se usa `NUMERIC`, que es exacto. · [2.1.1]
+
+**Ventas netas** (Casa Olivo). Suma del `subtotal` de los pedidos, excluidos los cancelados y los devueltos, sin gastos de envío. Es el KPI de referencia del bloque 2. · [2.1.2]
+
+---
+
 [0.1.1]: ../Bloque%200%20-%20Preparación/0.1.1%20-%20Terminal%20básica.md
 [0.1.2]: ../Bloque%200%20-%20Preparación/0.1.2%20-%20Git%20y%20GitHub.md
 [0.1.3]: ../Bloque%200%20-%20Preparación/0.1.3%20-%20VS%20Code.md
@@ -269,3 +321,6 @@
 [1.1.1]: ../Bloque%201%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md
 [1.1.2]: ../Bloque%201%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md
 [1.1.3]: ../Bloque%201%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md
+[2.1.1]: ../Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20PostgreSQL%20y%20pgAdmin.%20SELECT,%20FROM,%20WHERE%20y%20AS.md
+[2.1.2]: ../Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
+[2.1.3]: ../Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
