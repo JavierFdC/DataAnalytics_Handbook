@@ -63,7 +63,7 @@ Caso del bloque: **Café Lumen**, una cadena de cuatro cafeterías, con sus vent
 
 **2.1 Consultas básicas**
 
-- `2.1.1` [Modelo relacional, PostgreSQL y pgAdmin. SELECT, FROM, WHERE y AS](Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20PostgreSQL%20y%20pgAdmin.%20SELECT,%20FROM,%20WHERE%20y%20AS.md)
+- `2.1.1` [Modelo relacional, SELECT, FROM, WHERE y AS](Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md)
 - `2.1.2` [Agregaciones, agrupación y ordenación (GROUP BY, HAVING, ORDER BY)](Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md)
 - `2.1.3` [JOINs y teoría de conjuntos](Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md)
 
