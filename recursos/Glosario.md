@@ -263,9 +263,9 @@
 
 ## Bloque 2 — SQL y bases de datos
 
-**Alias.** Nombre alternativo que se da a una columna del resultado (`AS margen_pct`) o a una tabla dentro de una consulta (`FROM pedidos p`). No cambia la tabla: solo existe en la consulta. · [2.1.1], [2.1.3]
+**Alias.** Nombre alternativo que se da a una columna del resultado (`AS margen_pct`) o a una tabla dentro de una consulta (`FROM pedidos AS p`). No cambia la tabla: solo existe en la consulta. · [2.1.1], [2.1.3]
 
-**Anti-join.** Patrón para encontrar las filas de una tabla que no tienen pareja en otra: `LEFT JOIN` seguido de `WHERE <clave de la derecha> IS NULL`. Por ejemplo, los clientes que nunca han hecho un pedido. · [2.1.3]
+**Anti-join.** Patrón para encontrar las filas de una tabla que no tienen correspondencia en otra: `LEFT JOIN` seguido de `WHERE <clave de la derecha> IS NULL`. Por ejemplo, los clientes que nunca han hecho un pedido. · [2.1.3]
 
 **Cardinalidad, trampa de la.** Error por el que un JOIN uno a muchos repite las filas del lado "uno" y hace que se sumen varias veces sus medidas. Se evita sumando las medidas de la tabla más detallada o con `COUNT(DISTINCT ...)`. · [2.1.3]
 
@@ -289,7 +289,7 @@
 
 **Integridad referencial.** Garantía de que ninguna clave foránea apunta a una fila inexistente. La base de datos la hace cumplir al insertar, modificar o borrar. · [2.1.1]
 
-**JOIN.** Operación que combina las filas de dos tablas que se corresponden según una condición, normalmente la igualdad entre una clave foránea y una clave primaria. **INNER** devuelve solo las filas con pareja; **LEFT** conserva todas las de la izquierda; **RIGHT**, todas las de la derecha; **FULL**, todas las de ambas; **CROSS** combina todas con todas, sin condición. · [2.1.3]
+**JOIN.** Operación que combina las filas de dos tablas que se corresponden según una condición, normalmente la igualdad entre una clave foránea y una clave primaria. **INNER** devuelve solo las filas con correspondencia; **LEFT** conserva todas las de la izquierda; **RIGHT**, todas las de la derecha; **FULL**, todas las de ambas; **CROSS** combina todas con todas, sin condición. · [2.1.3]
 
 **Modelo relacional.** Forma de organizar los datos en tablas sobre un único tipo de cosa, relacionadas mediante claves, de modo que cada dato se guarda una sola vez. Lo propuso Edgar F. Codd en 1970. · [2.1.1]
 
@@ -321,6 +321,6 @@
 [1.1.1]: ../Bloque%201%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md
 [1.1.2]: ../Bloque%201%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md
 [1.1.3]: ../Bloque%201%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md
-[2.1.1]: ../Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20PostgreSQL%20y%20pgAdmin.%20SELECT,%20FROM,%20WHERE%20y%20AS.md
+[2.1.1]: ../Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md
 [2.1.2]: ../Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
 [2.1.3]: ../Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
