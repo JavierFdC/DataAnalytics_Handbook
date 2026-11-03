@@ -63,15 +63,15 @@ Caso del bloque: **Café Lumen**, una cadena de cuatro cafeterías, con sus vent
 
 **2.1 Consultas básicas**
 
-- `2.1.1` [Modelo relacional, SELECT, FROM, WHERE y AS](Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md)
-- `2.1.2` [Agregaciones, agrupación y ordenación (GROUP BY, HAVING, ORDER BY)](Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md)
-- `2.1.3` [JOINs y teoría de conjuntos](Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md)
+- `2.1.1` [Modelo relacional, SELECT, FROM, WHERE y AS](Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md)
+- `2.1.2` [Agregaciones, agrupación y ordenación (GROUP BY, HAVING, ORDER BY)](Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md)
+- `2.1.3` [JOINs y teoría de conjuntos](Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md)
 
 **2.2 SQL intermedio**
 
-- `2.2.1` Subconsultas
-- `2.2.2` Vistas y CTEs
-- `2.2.3` Funciones de ventana y práctica guiada
+- `2.2.1` [Subconsultas](Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md)
+- `2.2.2` [Vistas y CTEs](Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md)
+- `2.2.3` [Funciones de ventana y práctica guiada](Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20práctica%20guiada.md)
 
 Caso del bloque: **Casa Olivo**, una tienda online de artículos para el hogar, con su base de datos desde la apertura (marzo de 2024) hasta diciembre de 2025, en dos scripts SQL ([`dataset/`](Bloque%202%20-%20SQL/dataset/)).
 
@@ -255,8 +255,8 @@ Proyecto individual que se desarrolla de forma autónoma, fuera de las sesiones.
 
 *Información adicional para el alumno. No forma parte de las sesiones ni de la evaluación del curso.*
 
-- **[Glosario](recursos/Glosario.md)**: definiciones breves de los términos del curso, agrupadas por bloque y con enlace a la sesión donde se explica cada uno. Crece a medida que avanza el curso.
-- **[Certificaciones profesionales](recursos/Certificaciones%20profesionales.md)**: las certificaciones oficiales del mercado que se corresponden con cada bloque del curso (SQL, Python, cloud, IA, gobierno del dato, Power BI, Tableau y Qlik). Incluye precios, formato del examen, vigencia y el orden recomendado para certificarse.
+- **[Glosario](Recursos/Glosario.md)**: definiciones breves de los términos del curso, agrupadas por bloque y con enlace a la sesión donde se explica cada uno. Crece a medida que avanza el curso.
+- **[Certificaciones profesionales](Recursos/Certificaciones%20profesionales.md)**: las certificaciones oficiales del mercado que se corresponden con cada bloque del curso (SQL, Python, cloud, IA, gobierno del dato, Power BI, Tableau y Qlik). Incluye precios, formato del examen, vigencia y el orden recomendado para certificarse.
 
 ---
 
@@ -277,7 +277,7 @@ Proyecto individual que se desarrolla de forma autónoma, fuera de las sesiones.
 ```
 data-analytics-handbook/
 ├── README.md
-├── recursos/                               ← glosario, guías de instalación, cheatsheets, certificaciones
+├── Recursos/                               ← glosario, guías de instalación, cheatsheets, certificaciones
 ├── Bloque 0 - Preparación/
 ├── Bloque 1 - Fundamentos/                dataset/
 ├── Bloque 2 - SQL/                        dataset/

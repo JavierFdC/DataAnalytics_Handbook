@@ -265,13 +265,21 @@
 
 **Alias.** Nombre alternativo que se da a una columna del resultado (`AS margen_pct`) o a una tabla dentro de una consulta (`FROM pedidos AS p`). No cambia la tabla: solo existe en la consulta. · [2.1.1], [2.1.3]
 
-**Anti-join.** Patrón para encontrar las filas de una tabla que no tienen correspondencia en otra: `LEFT JOIN` seguido de `WHERE <clave de la derecha> IS NULL`. Por ejemplo, los clientes que nunca han hecho un pedido. · [2.1.3]
+**Anti-join.** Patrón para encontrar las filas de una tabla que no tienen correspondencia en otra: `LEFT JOIN` seguido de `WHERE <clave de la derecha> IS NULL`, o `WHERE NOT EXISTS (...)`. Por ejemplo, los clientes que nunca han hecho un pedido. · [2.1.3], [2.2.1]
 
 **Cardinalidad, trampa de la.** Error por el que un JOIN uno a muchos repite las filas del lado "uno" y hace que se sumen varias veces sus medidas. Se evita sumando las medidas de la tabla más detallada o con `COUNT(DISTINCT ...)`. · [2.1.3]
+
+**CASE.** Expresión condicional de SQL: `CASE WHEN condición THEN valor ... ELSE valor END`. Evalúa las condiciones en orden y devuelve el valor de la primera que se cumple. Se usa, por ejemplo, para asignar segmentos. · [2.1.2], [2.2.2]
 
 **Clave compuesta.** Clave primaria formada por varias columnas, porque ninguna sola identifica cada fila. En `lineas_pedido` es `pedido_id` + `num_linea`. · [2.1.1]
 
 **Clave foránea** (*foreign key*). Columna que apunta a la clave primaria de otra tabla, como `productos.categoria_id` hacia `categorias`. La base de datos impide que apunte a una fila que no existe. · [2.1.1]
+
+**COALESCE.** Función que devuelve el primero de sus argumentos que no es `NULL`: `COALESCE(codigo_promo, 'Sin código')`. Sirve para sustituir los vacíos por un valor. · [2.2.2]
+
+**Cohorte.** Grupo de clientes definido por cuándo o cómo llegaron (el mes de su primera compra, el código que usaron). Para comparar cohortes de forma justa, todas deben haber tenido el mismo tiempo de observación. · [2.2.2]
+
+**CTE** (*Common Table Expression*). Consulta con nombre definida con `WITH nombre AS (...)` al principio de una sentencia, que la consulta principal usa como una tabla. Varios CTEs encadenados permiten escribir un análisis por pasos. Solo existe mientras dura la sentencia. · [2.2.2]
 
 **DDL y DML.** Familias de instrucciones de SQL. **DDL** (*Data Definition Language*) define la estructura: `CREATE`, `ALTER`, `DROP`. **DML** (*Data Manipulation Language*) cambia los datos: `INSERT`, `UPDATE`, `DELETE`. Las consultas con `SELECT` se agrupan a veces como **DQL**. · [2.1.1]
 
@@ -279,7 +287,11 @@
 
 **DISTINCT.** Palabra clave que elimina las filas repetidas de un resultado (`SELECT DISTINCT provincia`) o cuenta valores distintos (`COUNT(DISTINCT cliente_id)`). · [2.1.1], [2.1.2]
 
+**EXISTS.** Condición que es verdadera si una subconsulta devuelve al menos una fila. `WHERE EXISTS (...)` encuentra las filas con alguna fila relacionada en otra tabla (*semi-join*) y `WHERE NOT EXISTS (...)`, las que no tienen ninguna (*anti-join*). No multiplica filas, a diferencia de un JOIN. · [2.2.1]
+
 **Función de agregación.** Función que resume muchas filas en un solo valor: `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`. Todas ignoran los `NULL`, salvo `COUNT(*)`. · [2.1.2]
+
+**Función de ventana** (*window function*). Función que calcula un valor a partir de un grupo de filas relacionadas con la fila actual (su ventana) sin juntarlas en una, como haría `GROUP BY`. Se reconoce por la cláusula `OVER (...)`: `PARTITION BY` define los grupos y `ORDER BY`, el orden dentro de cada uno. No se puede usar en el `WHERE`. · [2.2.3]
 
 **GROUP BY.** Cláusula que reparte las filas en grupos según el valor de una o varias columnas, para calcular una agregación por grupo. Cada columna del `SELECT` debe estar en el `GROUP BY` o dentro de una agregación. · [2.1.2]
 
@@ -291,6 +303,12 @@
 
 **JOIN.** Operación que combina las filas de dos tablas que se corresponden según una condición, normalmente la igualdad entre una clave foránea y una clave primaria. **INNER** devuelve solo las filas con correspondencia; **LEFT** conserva todas las de la izquierda; **RIGHT**, todas las de la derecha; **FULL**, todas las de ambas; **CROSS** combina todas con todas, sin condición. · [2.1.3]
 
+**LAG y LEAD.** Funciones de ventana que devuelven el valor de una columna en la fila anterior (`LAG`) o siguiente (`LEAD`) según el orden de la ventana. `LAG(ventas, 12)` mira doce filas atrás. Se usan para comparar con el periodo anterior o medir el tiempo entre compras. · [2.2.3]
+
+**Marco de la ventana** (*frame*). Las filas de la ventana que entran en el cálculo de cada fila. Con `ORDER BY` y sin más indicaciones va del principio hasta la fila actual (un acumulado); con `ROWS BETWEEN 2 PRECEDING AND CURRENT ROW`, son la fila actual y las dos anteriores (una media móvil). · [2.2.3]
+
+**Media móvil.** Media de los últimos N periodos, recalculada en cada periodo. Suaviza los picos de una serie para ver su tendencia. · [2.2.3]
+
 **Modelo relacional.** Forma de organizar los datos en tablas sobre un único tipo de cosa, relacionadas mediante claves, de modo que cada dato se guarda una sola vez. Lo propuso Edgar F. Codd en 1970. · [2.1.1]
 
 **Normalización.** Proceso de repartir los datos en tablas para eliminar repeticiones, descrito por las formas normales. La operación contraria, **desnormalizar**, se hace a propósito en los extractos y los modelos analíticos para leer más deprisa. · [2.1.1]
@@ -299,17 +317,33 @@
 
 **Operaciones de conjuntos.** Combinan los resultados de dos consultas con la misma forma, uno debajo de otro. `UNION` une sin duplicados, `UNION ALL` une con duplicados, `INTERSECT` devuelve lo común y `EXCEPT` lo que está en la primera y no en la segunda. · [2.1.3]
 
-**Orden lógico de ejecución.** Orden en que la base de datos procesa las cláusulas de una consulta, distinto del orden en que se escriben: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `SELECT` → `ORDER BY` → `LIMIT`. Explica, por ejemplo, por qué un alias no se puede usar en el `WHERE`. · [2.1.1], [2.1.2]
+**Orden lógico de ejecución.** Orden en que la base de datos procesa las cláusulas de una consulta, distinto del orden en que se escriben: `FROM` → `WHERE` → `GROUP BY` → `HAVING` → ventanas → `SELECT` → `ORDER BY` → `LIMIT`. Explica, por ejemplo, por qué un alias o una función de ventana no se pueden usar en el `WHERE`. · [2.1.1], [2.1.2], [2.2.3]
+
+**Pareto, análisis de.** Ordenar los elementos (productos, clientes) de mayor a menor y calcular el porcentaje acumulado sobre el total, para ver cuántos concentran la mayor parte. La "regla del 80/20" dice que el 20 % de los elementos suele generar el 80 % del resultado, aunque no siempre se cumple. · [2.2.3]
 
 **Plan de ejecución.** Secuencia de operaciones que el planificador de la base de datos elige para resolver una consulta (recorrer tablas, usar índices, estrategias de JOIN). Se consulta con `EXPLAIN`. · [2.1.3]
 
+**Ranking, funciones de.** Funciones de ventana que numeran las filas según un orden. `ROW_NUMBER()` no repite nunca; `RANK()` da el mismo puesto a los empates y salta los siguientes (1, 1, 3); `DENSE_RANK()` también los iguala, pero sin saltos (1, 1, 2). Con `PARTITION BY` resuelven el "top N de cada grupo". · [2.2.3]
+
 **Relación uno a muchos y muchos a muchos.** En una relación **uno a muchos** (1:N), cada fila de una tabla se relaciona con varias de otra: un cliente hace muchos pedidos. Una relación **muchos a muchos** (N:M), como pedidos y productos, se resuelve con una **tabla intermedia** (`lineas_pedido`) con una clave foránea hacia cada lado. · [2.1.1]
+
+**Segmentación de clientes.** Reparto de los clientes en grupos con un comportamiento parecido (por frecuencia de compra, gasto o tiempo desde la última compra) para dirigir a cada grupo una acción distinta. · [2.2.2]
 
 **SQL** (*Structured Query Language*). Lenguaje estándar para definir, modificar y consultar bases de datos relacionales. Es declarativo: se indica qué se quiere obtener y la base de datos decide cómo. Cada sistema habla un **dialecto** con funciones propias. · [2.1.1]
 
+**Subconsulta.** Consulta completa escrita entre paréntesis dentro de otra. Si devuelve un valor (**escalar**) va donde iría un valor; si devuelve una lista, con `IN` o `EXISTS`; si devuelve una tabla, en el `FROM`. · [2.2.1]
+
+**Subconsulta correlacionada.** Subconsulta que usa columnas de la consulta principal y, por eso, se evalúa conceptualmente una vez por cada fila. Permite comparar cada fila con su grupo, pero puede ser lenta en tablas grandes. · [2.2.1]
+
+**Tabla derivada.** Subconsulta escrita en el `FROM`, con un alias, que la consulta principal usa como una tabla. Permite agregar dos veces: primero por cliente, después sobre esos resultados. · [2.2.1]
+
 **Tipo de datos.** Clase de valores que admite una columna (`INTEGER`, `NUMERIC`, `VARCHAR`, `DATE`, `BOOLEAN`). La base de datos rechaza los valores que no encajan. Para dinero se usa `NUMERIC`, que es exacto. · [2.1.1]
 
-**Ventas netas** (Casa Olivo). Suma del `subtotal` de los pedidos, excluidos los cancelados y los devueltos, sin gastos de envío. Es el KPI de referencia del bloque 2. · [2.1.2]
+**Ventas netas** (Casa Olivo). Suma del `subtotal` de los pedidos, excluidos los cancelados y los devueltos, sin gastos de envío. Es el KPI de referencia del bloque 2. En la base de datos está guardado como la vista `v_pedidos_validos`. · [2.1.2], [2.2.2]
+
+**Vista** (*view*). Consulta guardada en la base de datos con un nombre (`CREATE VIEW`), que se consulta como una tabla. No guarda datos: se recalcula cada vez con las tablas de ese momento. Sirve para escribir una sola vez las definiciones de negocio que se repiten. · [2.2.2]
+
+**Vista materializada.** Vista que sí guarda el resultado de su consulta. Se consulta muy deprisa, pero sus datos son los del último `REFRESH MATERIALIZED VIEW`. · [2.2.2]
 
 ---
 
@@ -321,6 +355,9 @@
 [1.1.1]: ../Bloque%201%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md
 [1.1.2]: ../Bloque%201%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md
 [1.1.3]: ../Bloque%201%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md
-[2.1.1]: ../Bloque%202%20-%20SQL/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md
-[2.1.2]: ../Bloque%202%20-%20SQL/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
-[2.1.3]: ../Bloque%202%20-%20SQL/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
+[2.1.1]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md
+[2.1.2]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
+[2.1.3]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
+[2.2.1]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md
+[2.2.2]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md
+[2.2.3]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20práctica%20guiada.md
