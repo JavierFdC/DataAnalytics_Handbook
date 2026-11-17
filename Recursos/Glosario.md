@@ -111,6 +111,8 @@
 
 **PyPI** (*Python Package Index*). Repositorio público de paquetes de Python, de donde pip descarga las librerías. · [0.1.5]
 
+**Python install manager** (`py`). Gestor oficial de Python para Windows, que sustituye al instalador clásico. Instala, lista y desinstala versiones (`py install 3.14`, `py list`, `py uninstall 3.15`) y permite ejecutar una concreta con `py -V:3.14`. · [0.1.5]
+
 **Rama** (*branch*). Línea de trabajo paralela dentro de un repositorio. Se hacen commits en ella sin afectar a `main` y, cuando el trabajo está listo, se fusiona. · [0.1.2]
 
 **README.** Archivo `README.md` en la raíz de un repositorio que explica qué es el proyecto. GitHub lo muestra automáticamente como portada. · [0.1.4]
@@ -347,6 +349,76 @@
 
 ---
 
+## Bloque 3 — Python para análisis de datos
+
+**Ámbito** (*scope*). Zona del código en la que existe una variable. Las variables creadas dentro de una función, incluidos sus parámetros, son **locales**: desaparecen al terminar la llamada y no se ven desde fuera. Las definidas fuera de cualquier función son **globales**. · [3.2.1]
+
+**`assert`.** Instrucción que comprueba que una condición es verdadera y, si no lo es, detiene el programa con un `AssertionError`. Se usa para escribir pruebas rápidas de una función: `assert bloques_extra(31) == 1`. · [3.2.1]
+
+**Bucle `for`.** Estructura que repite un bloque de código una vez por cada elemento de una colección: `for viaje in viajes:`. Con un acumulador o un diccionario dentro, sirve para sumar, contar o agrupar. · [3.1.3]
+
+**Bucle `while`.** Estructura que repite un bloque de código mientras se cumpla una condición. Si nada dentro del bloque hace falsa la condición, el bucle no termina nunca (**bucle infinito**). · [3.1.3]
+
+**Comprehension.** Forma abreviada de crear una lista, un diccionario o un set a partir de otra colección, con una condición opcional: `[m for m in minutos if m > 30]`. Se lee como un `SELECT ... FROM ... WHERE`. · [3.1.3]
+
+**Diccionario** (`dict`). Colección de pares `clave: valor`, entre llaves, en la que cada valor se pide por su clave: `estacion["capacidad"]`. Las claves no se repiten. Es la forma natural de guardar un registro; una lista de diccionarios es una tabla. · [3.1.2]
+
+**Docstring.** Texto entre comillas triples en la primera línea del cuerpo de una función que explica qué hace y qué devuelve. Python lo muestra con `help()` y VS Code al pasar el ratón por el nombre de la función. · [3.2.1]
+
+**Estructura de datos.** Tipo que guarda muchos valores bajo un solo nombre. Las cuatro que trae Python son la lista, la tupla, el diccionario y el set. · [3.1.2]
+
+**Excepción** (*exception*). Error que Python lanza cuando no puede ejecutar una instrucción, con un tipo (`ValueError`, `TypeError`, `KeyError`...) y un mensaje. Si nadie la captura con `try` y `except`, detiene el programa y muestra el traceback. · [3.2.1]
+
+**f-string.** Texto con una `f` delante de las comillas en el que lo que va entre llaves se sustituye por su valor, con un formato opcional: `f"{ocupacion:.1%}"`. · [3.1.1]
+
+**`float`.** Tipo de Python para los números con decimales. Es de coma flotante: guarda aproximaciones, por lo que `0.1 + 0.2` da `0.30000000000000004`. Los decimales se escriben con punto. · [3.1.1]
+
+**Función.** Bloque de código con nombre que recibe datos por sus parámetros, hace un cálculo y devuelve el resultado con `return`. Se define con `def` y se llama escribiendo su nombre con paréntesis: `precio_viaje(38, "ocasional")`. Una función sin `return` devuelve `None`. · [3.2.1]
+
+**`if`, `elif`, `else`.** Estructura condicional de Python: ejecuta el primer bloque cuya condición se cumple, en orden. Equivale al `CASE WHEN` de SQL. · [3.1.3]
+
+**Imperativo** (lenguaje). Lenguaje en el que se escriben los pasos para obtener un resultado, como Python. Se opone a **declarativo**, como SQL, en el que se describe el resultado. · [3.1.1]
+
+**Índice** (en Python). Posición de un elemento en un string, una lista o una tupla. Empieza en 0, y los índices negativos cuentan desde el final: `-1` es el último. · [3.1.2]
+
+**Inmutable / mutable.** Un valor inmutable no se puede modificar una vez creado (números, strings, tuplas): sus métodos devuelven un valor nuevo. Uno mutable sí (listas, diccionarios, sets), y si dos variables apuntan a él, los cambios se ven a través de las dos. · [3.1.2]
+
+**Iterable.** Objeto que puede entregar sus elementos uno a uno y que, por tanto, se puede recorrer con un `for`: listas, strings, diccionarios, `range`, `enumerate`, `zip`. · [3.1.3]
+
+**Lista** (`list`). Secuencia ordenada y modificable de valores, entre corchetes: `[14, 9, 38]`. Admite repetidos y se accede a sus elementos por su índice. · [3.1.2]
+
+**Método.** Función que pertenece a un tipo de datos y se escribe detrás del valor con un punto: `nombre.strip()`, `lista.append(x)`. · [3.1.2]
+
+**`None`.** Valor de Python que representa la ausencia de dato, equivalente al `NULL` de SQL. Se pregunta por él con `is None`. · [3.1.1]
+
+**Notebook.** Documento de Jupyter (`.ipynb`) formado por celdas de código y de Markdown que se ejecutan una a una y guardan su resultado. Se ejecuta en el orden en que se pulsan las celdas, no en el que aparecen; para comprobar que es reproducible se reinicia el kernel y se ejecuta todo. · [3.1.1]
+
+**Parámetro y argumento.** El **parámetro** es el nombre que recibe un dato en la definición de una función (`def ocupacion(bicis, capacidad)`); el **argumento** es el valor concreto que se le pasa al llamarla (`ocupacion(2, 18)`). Los argumentos se pueden pasar por posición o por nombre: `ocupacion(capacidad=18, bicis=2)`. · [3.2.1]
+
+**`raise`.** Instrucción que lanza una excepción con el mensaje que elijamos. Se usa para validar las entradas de una función: `raise ValueError("duración no válida")`. · [3.2.1]
+
+**Sangría** (*indentation*). Espacios al principio de una línea. En Python forma parte de la sintaxis: las líneas con la misma sangría detrás de unos dos puntos forman un bloque. La convención son cuatro espacios. · [3.1.3]
+
+**Set.** Colección sin orden y sin repetidos, entre llaves: `{"Plaza Mayor", "Parque del Río"}`. Admite las operaciones de conjuntos: unión `|`, intersección `&` y diferencia `-`. Un set vacío se crea con `set()`. · [3.1.2]
+
+**Slicing.** Selección de un trozo de un string, una lista o una tupla con `[inicio:fin]`, que incluye `inicio` y excluye `fin`: `inicio[:10]`. · [3.1.2]
+
+**String** (`str`). Tipo de Python para el texto, entre comillas simples o dobles. Es una secuencia inmutable de caracteres. · [3.1.1], [3.1.2]
+
+**Traceback.** Informe que muestra Python cuando una excepción detiene el programa: el camino de llamadas que llevó hasta el error y, en la última línea, su tipo y su mensaje. Se lee empezando por esa última línea. · [3.2.1]
+
+**`try` / `except`.** Estructura que captura una excepción: si dentro del `try` se produce el error indicado en el `except`, se ejecuta ese bloque en lugar de detener el programa. Conviene capturar solo el tipo de error que se espera: `except ValueError:`. · [3.2.1]
+
+**Tupla** (`tuple`). Secuencia ordenada e inmutable, entre paréntesis: `(1, "Plaza Mayor", 14)`. Se usa para registros fijos y se puede desempaquetar en varias variables. Lo que crea una tupla son las comas: `precio = 1,50` es la tupla `(1, 50)`. · [3.1.2]
+
+**Valor por defecto.** Valor que toma un parámetro si al llamar a la función no se indica: en `def precio_viaje(minutos, usuario, bici="mecánica")`, `bici` vale `"mecánica"` salvo que se pase otra. Los parámetros con valor por defecto van detrás de los que no lo tienen. · [3.2.1]
+
+**Variable** (en Python). Nombre que se asigna a un valor con `=` para usarlo después. No declara su tipo: el tipo es del valor. No confundir con la variable estadística del bloque 1. · [3.1.1]
+
+**Vectorización.** Aplicar una operación a una columna o un array completo de una vez, con código compilado, en lugar de recorrerlo elemento a elemento con un bucle de Python. Es lo que hace rápidos a NumPy y pandas. · [3.1.3]
+
+---
+
 [0.1.1]: ../Bloque%200%20-%20Preparación/0.1.1%20-%20Terminal%20básica.md
 [0.1.2]: ../Bloque%200%20-%20Preparación/0.1.2%20-%20Git%20y%20GitHub.md
 [0.1.3]: ../Bloque%200%20-%20Preparación/0.1.3%20-%20VS%20Code.md
@@ -361,3 +433,7 @@
 [2.2.1]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md
 [2.2.2]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md
 [2.2.3]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20práctica%20guiada.md
+[3.1.1]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno,%20tipos%20de%20datos%20y%20operadores.md
+[3.1.2]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings,%20listas,%20tuplas,%20diccionarios%20y%20sets.md
+[3.1.3]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo,%20bucles%20y%20comprehensions.md
+[3.2.1]: ../Bloque%203%20-%20Python/3.2%20-%20Funciones%20y%20objetos/3.2.1%20-%20Funciones,%20parámetros,%20valores%20por%20defecto%20y%20manejo%20de%20errores.md

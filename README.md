@@ -77,17 +77,19 @@ Caso del bloque: **Casa Olivo**, una tienda online de artículos para el hogar, 
 
 ---
 
+<a id="bloque-3--python-para-analisis-de-datos"></a>
+
 ## Bloque 3 — Python para análisis de datos
 
 **3.1 Sintaxis y estructuras de datos**
 
-- `3.1.1` Entorno, tipos de datos y operadores
-- `3.1.2` Strings, listas, tuplas, diccionarios y sets
-- `3.1.3` Control de flujo, bucles, range, enumerate, zip y comprehensions
+- `3.1.1` [Entorno, tipos de datos y operadores](Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno,%20tipos%20de%20datos%20y%20operadores.md)
+- `3.1.2` [Strings, listas, tuplas, diccionarios y sets](Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings,%20listas,%20tuplas,%20diccionarios%20y%20sets.md)
+- `3.1.3` [Control de flujo, bucles, range, enumerate, zip y comprehensions](Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo,%20bucles%20y%20comprehensions.md)
 
 **3.2 Funciones y objetos**
 
-- `3.2.1` Funciones, parámetros, valores por defecto y manejo de errores
+- `3.2.1` [Funciones, parámetros, valores por defecto y manejo de errores](Bloque%203%20-%20Python/3.2%20-%20Funciones%20y%20objetos/3.2.1%20-%20Funciones,%20parámetros,%20valores%20por%20defecto%20y%20manejo%20de%20errores.md)
 - `3.2.2` args, kwargs, lambdas y módulos
 - `3.2.3` POO aplicada: clases, herencia y polimorfismo
 
@@ -118,6 +120,8 @@ Caso del bloque: **Casa Olivo**, una tienda online de artículos para el hogar, 
 - `3.7.1` Estadística descriptiva y distribuciones
 - `3.7.2` Correlación, outliers y causalidad
 - `3.7.3` Muestreo, inferencia y test A/B
+
+Caso del bloque: **Pedalia**, el servicio de bicicleta compartida de una ciudad española de tamaño medio, con sus estaciones, viajes y tarifas. Las prácticas se hacen en notebooks de Jupyter dentro del portfolio.
 
 ---
 
