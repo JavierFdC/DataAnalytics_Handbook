@@ -15,7 +15,7 @@
 
 ---
 
-## Bloque 0 — Preparación
+## Bloque 0 — Puesta a punto
 
 **Área de preparación** (*staging area*). Zona intermedia de Git donde elegimos qué cambios entrarán en el próximo commit. Se añaden con `git add`. · [0.1.2]
 
@@ -349,21 +349,29 @@
 
 ---
 
-## Bloque 3 — Python para análisis de datos
+## Bloque 3 — Python para Data Analytics
 
 **Ámbito** (*scope*). Zona del código en la que existe una variable. Las variables creadas dentro de una función, incluidos sus parámetros, son **locales**: desaparecen al terminar la llamada y no se ven desde fuera. Las definidas fuera de cualquier función son **globales**. · [3.2.1]
 
+**`*args` y `**kwargs`.** Parámetros que recogen los argumentos sobrantes de una llamada: `*args`, los posicionales, en una tupla; `**kwargs`, los que se pasan por nombre, en un diccionario. En la llamada, `*` y `**` hacen lo contrario: desempaquetan una lista o un diccionario en argumentos (`precio_viaje(64, "ocasional", **escenario)`). · [3.2.2]
+
 **`assert`.** Instrucción que comprueba que una condición es verdadera y, si no lo es, detiene el programa con un `AssertionError`. Se usa para escribir pruebas rápidas de una función: `assert bloques_extra(31) == 1`. · [3.2.1]
+
+**Atributo.** Dato que guarda un objeto, como el nombre o las bicis de una estación. Se lee y se asigna con un punto: `hospital.bicis`. Se crea normalmente en `__init__` con `self.bicis = bicis`. · [3.2.3]
 
 **Bucle `for`.** Estructura que repite un bloque de código una vez por cada elemento de una colección: `for viaje in viajes:`. Con un acumulador o un diccionario dentro, sirve para sumar, contar o agrupar. · [3.1.3]
 
 **Bucle `while`.** Estructura que repite un bloque de código mientras se cumpla una condición. Si nada dentro del bloque hace falsa la condición, el bucle no termina nunca (**bucle infinito**). · [3.1.3]
+
+**Clase y objeto.** Una **clase** es el molde de un tipo de dato nuevo: describe qué datos (atributos) y qué operaciones (métodos) tiene. Un **objeto** o **instancia** es cada cosa concreta creada con ella: `hospital = Estacion("Hospital General", 18, 2)`. Se define con `class`, y su método `__init__` prepara cada objeto al crearlo. · [3.2.3]
 
 **Comprehension.** Forma abreviada de crear una lista, un diccionario o un set a partir de otra colección, con una condición opcional: `[m for m in minutos if m > 30]`. Se lee como un `SELECT ... FROM ... WHERE`. · [3.1.3]
 
 **Diccionario** (`dict`). Colección de pares `clave: valor`, entre llaves, en la que cada valor se pide por su clave: `estacion["capacidad"]`. Las claves no se repiten. Es la forma natural de guardar un registro; una lista de diccionarios es una tabla. · [3.1.2]
 
 **Docstring.** Texto entre comillas triples en la primera línea del cuerpo de una función que explica qué hace y qué devuelve. Python lo muestra con `help()` y VS Code al pasar el ratón por el nombre de la función. · [3.2.1]
+
+**Encapsulación.** Principio de la programación orientada a objetos según el cual un objeto agrupa sus datos con las operaciones que los modifican, y los cambios pasan por esas operaciones, que pueden negarse a hacer lo que no tiene sentido: `sacar_bici` de una estación vacía lanza un error. · [3.2.3]
 
 **Estructura de datos.** Tipo que guarda muchos valores bajo un solo nombre. Las cuatro que trae Python son la lista, la tupla, el diccionario y el set. · [3.1.2]
 
@@ -375,6 +383,8 @@
 
 **Función.** Bloque de código con nombre que recibe datos por sus parámetros, hace un cálculo y devuelve el resultado con `return`. Se define con `def` y se llama escribiendo su nombre con paréntesis: `precio_viaje(38, "ocasional")`. Una función sin `return` devuelve `None`. · [3.2.1]
 
+**Herencia.** Mecanismo por el que una clase (**subclase** o hija) recibe los atributos y métodos de otra (**clase madre**): `class TarifaAbonado(Tarifa)`. La hija solo escribe lo que la diferencia, y puede **sobrescribir** los métodos de la madre o ampliarlos llamándolos con `super()`. · [3.2.3]
+
 **`if`, `elif`, `else`.** Estructura condicional de Python: ejecuta el primer bloque cuya condición se cumple, en orden. Equivale al `CASE WHEN` de SQL. · [3.1.3]
 
 **Imperativo** (lenguaje). Lenguaje en el que se escriben los pasos para obtener un resultado, como Python. Se opone a **declarativo**, como SQL, en el que se describe el resultado. · [3.1.1]
@@ -385,9 +395,15 @@
 
 **Iterable.** Objeto que puede entregar sus elementos uno a uno y que, por tanto, se puede recorrer con un `for`: listas, strings, diccionarios, `range`, `enumerate`, `zip`. · [3.1.3]
 
+**`lambda`.** Forma de escribir una función pequeña, sin nombre y de una sola expresión: `lambda e: e["bicis"]`. Se usa sobre todo como criterio de `sorted`, `max` y `min` en su parámetro `key`. · [3.2.2]
+
+**Librería estándar.** Conjunto de módulos que vienen con Python y se usan sin instalar nada, importándolos: `math`, `statistics`, `datetime`... · [3.2.2]
+
 **Lista** (`list`). Secuencia ordenada y modificable de valores, entre corchetes: `[14, 9, 38]`. Admite repetidos y se accede a sus elementos por su índice. · [3.1.2]
 
-**Método.** Función que pertenece a un tipo de datos y se escribe detrás del valor con un punto: `nombre.strip()`, `lista.append(x)`. · [3.1.2]
+**Método.** Función que pertenece a un tipo de datos y se escribe detrás del valor con un punto: `nombre.strip()`, `lista.append(x)`. En una clase propia se define con `def` dentro de la clase y recibe el objeto como `self`. · [3.1.2], [3.2.3]
+
+**Módulo.** Archivo `.py` con funciones, clases o datos que se puede **importar** desde otro programa o notebook con `import`: `import pedalia`, `from statistics import median`, `import pandas as pd`. Python importa cada módulo una vez por sesión, así que tras cambiarlo hay que reiniciar el kernel. · [3.2.2]
 
 **`None`.** Valor de Python que representa la ausencia de dato, equivalente al `NULL` de SQL. Se pregunta por él con `is None`. · [3.1.1]
 
@@ -395,9 +411,13 @@
 
 **Parámetro y argumento.** El **parámetro** es el nombre que recibe un dato en la definición de una función (`def ocupacion(bicis, capacidad)`); el **argumento** es el valor concreto que se le pasa al llamarla (`ocupacion(2, 18)`). Los argumentos se pueden pasar por posición o por nombre: `ocupacion(capacidad=18, bicis=2)`. · [3.2.1]
 
+**Polimorfismo.** Capacidad de objetos de clases distintas de responder al mismo método, cada uno a su manera: `tarifa.precio(75)` aplica la regla del abonado, del ocasional o del bono según el objeto. Permite añadir tipos nuevos sin cambiar el código que los usa. · [3.2.3]
+
 **`raise`.** Instrucción que lanza una excepción con el mensaje que elijamos. Se usa para validar las entradas de una función: `raise ValueError("duración no válida")`. · [3.2.1]
 
 **Sangría** (*indentation*). Espacios al principio de una línea. En Python forma parte de la sintaxis: las líneas con la misma sangría detrás de unos dos puntos forman un bloque. La convención son cuatro espacios. · [3.1.3]
+
+**`self`.** Primer parámetro de los métodos de una clase: es el propio objeto sobre el que se llama el método. Python lo pasa solo, así que `hospital.ocupacion()` no lleva argumentos aunque el método se defina como `def ocupacion(self)`. · [3.2.3]
 
 **Set.** Colección sin orden y sin repetidos, entre llaves: `{"Plaza Mayor", "Parque del Río"}`. Admite las operaciones de conjuntos: unión `|`, intersección `&` y diferencia `-`. Un set vacío se crea con `set()`. · [3.1.2]
 
@@ -419,21 +439,23 @@
 
 ---
 
-[0.1.1]: ../Bloque%200%20-%20Preparación/0.1.1%20-%20Terminal%20básica.md
-[0.1.2]: ../Bloque%200%20-%20Preparación/0.1.2%20-%20Git%20y%20GitHub.md
-[0.1.3]: ../Bloque%200%20-%20Preparación/0.1.3%20-%20VS%20Code.md
-[0.1.4]: ../Bloque%200%20-%20Preparación/0.1.4%20-%20Markdown%20para%20documentar.md
-[0.1.5]: ../Bloque%200%20-%20Preparación/0.1.5%20-%20Instalación%20de%20Python,%20PostgreSQL%20y%20pgAdmin.md
-[1.1.1]: ../Bloque%201%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md
-[1.1.2]: ../Bloque%201%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md
-[1.1.3]: ../Bloque%201%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md
-[2.1.1]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md
-[2.1.2]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
-[2.1.3]: ../Bloque%202%20-%20SQL/2.1%20-%20Consultas%20básicas/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
-[2.2.1]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md
-[2.2.2]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md
-[2.2.3]: ../Bloque%202%20-%20SQL/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20práctica%20guiada.md
-[3.1.1]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno,%20tipos%20de%20datos%20y%20operadores.md
-[3.1.2]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings,%20listas,%20tuplas,%20diccionarios%20y%20sets.md
-[3.1.3]: ../Bloque%203%20-%20Python/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo,%20bucles%20y%20comprehensions.md
-[3.2.1]: ../Bloque%203%20-%20Python/3.2%20-%20Funciones%20y%20objetos/3.2.1%20-%20Funciones,%20parámetros,%20valores%20por%20defecto%20y%20manejo%20de%20errores.md
+[0.1.1]: ../Bloque%200%20-%20Puesta%20a%20punto/0.1%20-%20Herramientas%20del%20curso/0.1.1%20-%20Terminal%20básica.md
+[0.1.2]: ../Bloque%200%20-%20Puesta%20a%20punto/0.1%20-%20Herramientas%20del%20curso/0.1.2%20-%20Git%20y%20GitHub.md
+[0.1.3]: ../Bloque%200%20-%20Puesta%20a%20punto/0.1%20-%20Herramientas%20del%20curso/0.1.3%20-%20VS%20Code.md
+[0.1.4]: ../Bloque%200%20-%20Puesta%20a%20punto/0.1%20-%20Herramientas%20del%20curso/0.1.4%20-%20Markdown%20para%20documentar.md
+[0.1.5]: ../Bloque%200%20-%20Puesta%20a%20punto/0.1%20-%20Herramientas%20del%20curso/0.1.5%20-%20Instalación%20de%20Python,%20PostgreSQL%20y%20pgAdmin.md
+[1.1.1]: ../Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentación%20del%20curso,%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md
+[1.1.2]: ../Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables,%20dimensiones,%20medidas%20y%20KPIs.md
+[1.1.3]: ../Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20análisis.md
+[2.1.1]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20básicas/2.1.1%20-%20Modelo%20relacional,%20SELECT,%20FROM,%20WHERE%20y%20AS.md
+[2.1.2]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20básicas/2.1.2%20-%20Agregaciones,%20agrupación%20y%20ordenación.md
+[2.1.3]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20básicas/2.1.3%20-%20JOINs%20y%20teoría%20de%20conjuntos.md
+[2.2.1]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md
+[2.2.2]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md
+[2.2.3]: ../Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20práctica%20guiada.md
+[3.1.1]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno,%20tipos%20de%20datos%20y%20operadores.md
+[3.1.2]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings,%20listas,%20tuplas,%20diccionarios%20y%20sets.md
+[3.1.3]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo,%20bucles%20y%20comprehensions.md
+[3.2.1]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.2%20-%20Funciones%20y%20objetos/3.2.1%20-%20Funciones,%20parámetros,%20valores%20por%20defecto%20y%20manejo%20de%20errores.md
+[3.2.2]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.2%20-%20Funciones%20y%20objetos/3.2.2%20-%20args,%20kwargs,%20lambdas%20y%20módulos.md
+[3.2.3]: ../Bloque%203%20-%20Python%20para%20Data%20Analytics/3.2%20-%20Funciones%20y%20objetos/3.2.3%20-%20Clases,%20herencia%20y%20polimorfismo.md
