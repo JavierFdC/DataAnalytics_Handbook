@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoevaluación 1.1 · Data Analytics Handbook</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<main id="app"></main>
+<!-- Generado con el banco de preguntas: no editar a mano -->
+<script>
+const CONFIG = {
+ "id": "1.1",
+ "title": "Fundamentos",
+ "block": "Bloque 1 - Fundamentos de Data Analytics",
+ "caseName": "Café Lumen",
+ "readme": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/README.md#bloque-1--fundamentos-de-data-analytics",
+ "nextStep": "al bloque 2",
+ "rules": [
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "1.1.1-01",
+     "type": "single",
+     "stem": "\"En enero, las bebidas frías fueron el 5 % de las ventas de Café Lumen; en junio, el 27 %.\" ¿A qué nivel corresponde esta frase?",
+     "explain": "Es un dato agregado (muchas líneas de ticket resumidas en un porcentaje) y comparado entre dos meses, pero todavía no explica <strong>por qué</strong> ocurre. El conocimiento sería \"con el calor, los clientes cambian el café caliente por bebidas frías\", y la decisión, \"la carta de verano entra en abril\".",
+     "options": [
+      "Información",
+      "Dato",
+      "Conocimiento",
+      "Decisión"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#dato-información-conocimiento-decisión",
+      "label": "1.1.1 · Dato, información, conocimiento, decisión"
+     }
+    },
+    {
+     "id": "1.1.1-02",
+     "type": "single",
+     "stem": "El extracto <code>ventas.csv</code> que recibimos de Café Lumen, ¿en qué fase del ciclo de vida del dato llega a nuestras manos?",
+     "explain": "Alguien ya generó, ingirió, almacenó y unió las ventas del TPV y de la app en una sola tabla. Es importante saberlo porque <strong>heredamos todo lo que se hizo por el camino</strong>: si esa transformación tuvo un error, nuestro análisis también lo tendrá. Por eso conviene preguntar siempre de dónde vienen los datos y qué se les ha hecho.",
+     "options": [
+      "4. Transformación",
+      "1. Generación",
+      "2. Ingesta",
+      "5. Análisis"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#4-el-ciclo-de-vida-del-dato",
+      "label": "1.1.1 · El ciclo de vida del dato"
+     }
+    },
+    {
+     "id": "1.1.1-03",
+     "type": "single",
+     "stem": "¿Qué rol se encarga de transformar los datos almacenados en tablas limpias y documentadas, listas para analizar, normalmente con SQL y dbt?",
+     "explain": "El Data Engineer construye los flujos que mueven y almacenan los datos; el Analytics Engineer trabaja encima, en la fase de transformación, para que el Data Analyst reciba tablas fiables. El Data Steward vela por la calidad y la definición de los datos, pero no construye las tablas.",
+     "options": [
+      "Analytics Engineer",
+      "Data Engineer",
+      "Data Analyst",
+      "Data Steward"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#5-roles-en-un-equipo-de-datos",
+      "label": "1.1.1 · Roles en un equipo de datos"
+     }
+    },
+    {
+     "id": "1.1.1-04",
+     "type": "single",
+     "stem": "¿Cuál de estas actividades <strong>no</strong> es Data Analytics?",
+     "explain": "El Data Analytics consiste en <strong>reducir la incertidumbre antes de decidir</strong>, y empieza por la pregunta, no por los datos. Acumular datos \"por si acaso\" o explorarlos sin una pregunta suele acabar en dashboards que nadie consulta.",
+     "options": [
+      "Reunir todos los datos posibles y explorarlos hasta que \"digan algo\"",
+      "Responder una pregunta de negocio con evidencia cuantitativa",
+      "Transformar datos brutos en información que permita actuar",
+      "Apoyar con datos una decisión que antes se tomaba por intuición"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#3-qué-es-y-qué-no-el-data-analytics",
+      "label": "1.1.1 · ¿Qué es y qué no el Data Analytics?"
+     }
+    },
+    {
+     "id": "1.1.1-05",
+     "type": "single",
+     "stem": "Entregamos a Café Lumen un informe impecable, con cifras correctas y gráficos claros, pero nadie cambia ninguna decisión. ¿Qué ha fallado?",
+     "explain": "Un análisis no empieza con los datos, sino con una pregunta de negocio. Si al terminar nadie decide nada distinto, no hemos hecho análisis: hemos hecho aritmética.",
+     "options": [
+      "El informe no responde a una pregunta de negocio que alguien necesitara resolver",
+      "Faltan gráficos interactivos",
+      "Los datos no estaban en una base de datos",
+      "Debería haberse hecho con Python en lugar de con Excel"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#la-frase-clave",
+      "label": "1.1.1 · La frase clave"
+     }
+    },
+    {
+     "id": "1.1.1-06",
+     "type": "match",
+     "stem": "¿Qué rol se encarga de cada tarea?",
+     "explain": "Cada rol cubre unas fases del ciclo de vida. En equipos pequeños, y en este curso, el analista asume tareas de varios: prepara datos como un ingeniero, construye dashboards como un desarrollador de BI y entrena algún modelo sencillo como un científico de datos.",
+     "choices": [
+      "Data Engineer",
+      "BI Developer",
+      "Data Scientist",
+      "Data Steward"
+     ],
+     "items": [
+      [
+       "Construir y mantener los flujos que mueven y almacenan los datos",
+       0
+      ],
+      [
+       "Diseñar y mantener los cuadros de mando corporativos",
+       1
+      ],
+      [
+       "Construir modelos estadísticos y de machine learning",
+       2
+      ],
+      [
+       "Velar por la calidad y la definición de los datos de su área",
+       3
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#5-roles-en-un-equipo-de-datos",
+      "label": "1.1.1 · Roles en un equipo de datos"
+     }
+    },
+    {
+     "id": "1.1.1-07",
+     "type": "single",
+     "stem": "¿Qué diferencia a un Data Architect de un Data Engineer?",
+     "explain": "El arquitecto <strong>diseña</strong> el sistema (modelos, plataformas, estándares) y el ingeniero lo <strong>construye y lo mantiene</strong>. Se confunden a menudo porque en empresas medianas suele ser la misma persona.",
+     "options": [
+      "El arquitecto diseña cómo se organizan y almacenan los datos; el ingeniero construye y mantiene esos flujos",
+      "El arquitecto trabaja con SQL y el ingeniero, con Python",
+      "El arquitecto construye los dashboards y el ingeniero, los modelos",
+      "Son dos nombres para el mismo puesto"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#5-roles-en-un-equipo-de-datos",
+      "label": "1.1.1 · Roles en un equipo de datos"
+     }
+    },
+    {
+     "id": "1.1.1-08",
+     "type": "match",
+     "stem": "¿Qué herramienta elegirías en cada caso?",
+     "explain": "Las herramientas son el medio, no el fin: lo que hace bueno un análisis es la pregunta que responde. Aun así, cada herramienta tiene su sitio en el ciclo de vida del dato.",
+     "choices": [
+      "SQL",
+      "Python",
+      "Excel",
+      "Power BI, Tableau o Qlik"
+     ],
+     "items": [
+      [
+       "Consultar datos que viven en una base de datos relacional",
+       0
+      ],
+      [
+       "Un prototipo rápido con un dataset pequeño, para uso propio",
+       2
+      ],
+      [
+       "Un informe que se actualiza cada semana y consultan muchas personas",
+       3
+      ],
+      [
+       "Un proceso repetitivo con datos voluminosos y un modelo estadístico",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#6-el-ecosistema-de-herramientas",
+      "label": "1.1.1 · El ecosistema de herramientas"
+     }
+    },
+    {
+     "id": "1.1.1-09",
+     "type": "single",
+     "stem": "Un análisis es correcto, pero la dirección no lo entiende y no lo usa. ¿Qué causa de fracaso es, y qué fase del ciclo rompe?",
+     "explain": "La mayoría de los proyectos de datos fracasan por razones de negocio, no técnicas, y cada causa rompe una fase distinta: la pregunta mal definida rompe la decisión antes de empezar, la mala calidad rompe las fases 1 a 4 y la falta de comunicación rompe la fase 6. Un buen analista vigila el ciclo entero.",
+     "options": [
+      "Resultado no comunicado: rompe la fase 6, visualización y comunicación",
+      "Pregunta mal definida: rompe la fase 1, generación",
+      "Datos de mala calidad: rompe la fase 5, análisis",
+      "Herramienta equivocada: rompe la fase 3, almacenamiento"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.1%20-%20Presentaci%C3%B3n%20del%20curso%2C%20ecosistema%20y%20ciclo%20de%20vida%20del%20dato.md#7-por-qué-fracasan-los-proyectos-de-datos",
+      "label": "1.1.1 · Por qué fracasan los proyectos de datos"
+     }
+    }
+   ]
+  },
+  {
+   "count": 4,
+   "pool": [
+    {
+     "id": "1.1.2-01",
+     "type": "match",
+     "stem": "¿De qué tipo es cada variable de Café Lumen?",
+     "explain": "<code>valoracion_ticket</code> son categorías con un orden; su media se usa mucho, pero con cautela, porque supone que de 1 a 2 estrellas hay la misma distancia que de 4 a 5. <code>cantidad</code> es un entero que sale de contar. <code>canal</code> son categorías sin orden. <code>importe</code> puede tomar cualquier valor en un rango y tiene sentido calcular su media.",
+     "choices": [
+      "Cualitativa nominal",
+      "Cualitativa ordinal",
+      "Cuantitativa discreta",
+      "Cuantitativa continua"
+     ],
+     "items": [
+      [
+       "<code>valoracion_ticket</code> (de 1 a 5 estrellas)",
+       1
+      ],
+      [
+       "<code>cantidad</code>",
+       2
+      ],
+      [
+       "<code>canal</code> (Local, Para llevar, App)",
+       0
+      ],
+      [
+       "<code>importe</code>",
+       3
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#3-tipos-de-variables",
+      "label": "1.1.2 · Tipos de variables"
+     }
+    },
+    {
+     "id": "1.1.2-02",
+     "type": "match",
+     "stem": "Clasifica estos campos en dimensiones o medidas.",
+     "explain": "Las dimensiones responden a ¿dónde?, ¿cuándo? y ¿qué?, y sirven para agrupar y filtrar. Las medidas responden a ¿cuánto? y ¿cuántos?, y se agregan. La pregunta decisiva es: <strong>¿tiene sentido sumar o promediar este campo?</strong> Sumar <code>tienda_id</code> no significa nada, aunque fuera un número.",
+     "choices": [
+      "Dimensión",
+      "Medida"
+     ],
+     "items": [
+      [
+       "<code>tienda_id</code>",
+       0
+      ],
+      [
+       "<code>importe</code>",
+       1
+      ],
+      [
+       "<code>hora</code>",
+       0
+      ],
+      [
+       "<code>cantidad</code>",
+       1
+      ],
+      [
+       "<code>producto</code>",
+       0
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#4-dimensiones-y-medidas",
+      "label": "1.1.2 · Dimensiones y medidas"
+     }
+    },
+    {
+     "id": "1.1.2-03",
+     "type": "single",
+     "stem": "En un mes, Madrid vende 10.000 € con un coste de 4.000 € (margen del 60 %) y Valencia vende 2.000 € con un coste de 600 € (margen del 70 %). ¿Cuál es el margen de las dos tiendas juntas?",
+     "explain": "El margen es una medida <strong>no aditiva</strong>: no se suma ni se promedia, se <strong>recalcula con los totales</strong>. Las dos tiendas venden 12.000 € con un coste de 4.600 €, así que el margen conjunto es (12.000 − 4.600) / 12.000 = 61,7 %. La media simple (65 %) da el mismo peso a Valencia que a Madrid, aunque Madrid venda cinco veces más.",
+     "options": [
+      "61,7 %",
+      "65 %, la media de los dos márgenes",
+      "130 %, la suma de los dos márgenes",
+      "No se puede calcular sin las ventas por producto"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#no-todas-las-medidas-se-suman",
+      "label": "1.1.2 · No todas las medidas se suman"
+     }
+    },
+    {
+     "id": "1.1.2-04",
+     "type": "single",
+     "stem": "Un compañero calcula el ticket medio de Café Lumen dividiendo las ventas del semestre entre el número de filas de <code>ventas.csv</code> y obtiene 2,97 €. ¿Qué ha hecho mal?",
+     "explain": "Ha ignorado la <strong>granularidad</strong>. Una fila de <code>ventas.csv</code> es <strong>una línea de ticket</strong> (un producto dentro de un ticket). El archivo tiene 80.874 filas, pero solo 47.987 tickets. Dividiendo entre tickets, el ticket medio real es <strong>5,01 €</strong>. La regla práctica: antes de analizar, escribe en una frase qué representa cada fila.",
+     "options": [
+      "Cada fila es una línea de ticket, no un ticket",
+      "No ha excluido los tickets anulados",
+      "Ha usado la media en lugar de la mediana",
+      "No ha descontado el 10 % de los socios de la app"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#5-granularidad-qué-representa-una-fila",
+      "label": "1.1.2 · Granularidad"
+     }
+    },
+    {
+     "id": "1.1.2-05",
+     "type": "single",
+     "stem": "Para comparar las ventas de Madrid en enero con su objetivo (11.500 €), alguien pega el objetivo en cada línea de venta y suma la columna. Obtiene 45.666.500 €. ¿Cómo se hace bien?",
+     "explain": "Ha unido dos tablas de <strong>distinta granularidad</strong>. El objetivo es de nivel tienda-mes y las ventas, de nivel línea de ticket, así que el objetivo se ha repetido en las 3.971 líneas de Madrid en enero (3.971 × 11.500 € = 45.666.500 €). Lo correcto es <strong>agregar primero</strong> las ventas a la granularidad del objetivo y comparar después: una fila con las ventas y otra con el objetivo.",
+     "options": [
+      "Sumar primero las ventas por tienda y mes, y comparar después con el objetivo",
+      "Dividir el resultado entre el número de días del mes",
+      "Pegar el objetivo solo en la primera línea de cada ticket",
+      "Usar la media del objetivo en lugar de la suma"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#consecuencia-3-unir-tablas-de-distinta-granularidad-multiplica",
+      "label": "1.1.2 · Unir tablas de distinta granularidad"
+     }
+    },
+    {
+     "id": "1.1.2-06",
+     "type": "single",
+     "stem": "La ficha del KPI \"Ventas netas\" dice: *Fórmula: suma de <code>importe</code> de <code>ventas.csv</code>*. Con esa ficha, dos analistas obtienen 240.451,99 € y 237.144,91 €. ¿Qué campo de la ficha falta o está mal definido?",
+     "explain": "Uno de los analistas ha excluido los 669 tickets anulados (<code>estado_ticket = Anulado</code>) y el otro no. Si la ficha no dice qué registros no se cuentan, cada uno decide por su cuenta y el KPI deja de ser comparable.",
+     "options": [
+      "Los criterios de exclusión",
+      "La fuente",
+      "La frecuencia",
+      "La meta"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#la-ficha-de-un-kpi",
+      "label": "1.1.2 · La ficha de un KPI"
+     }
+    },
+    {
+     "id": "1.1.2-07",
+     "type": "single",
+     "stem": "<code>cliente_id</code> es un número (por ejemplo, 1043). ¿Qué tiene sentido hacer con él?",
+     "explain": "Los identificadores son <strong>nominales</strong>, aunque estén formados por números: sirven para distinguir y para contar elementos distintos, nunca para operar. Pasa lo mismo con un código postal: <code>08012</code> no es \"ocho mil doce\".",
+     "options": [
+      "Contar cuántos clientes distintos hay",
+      "Calcular su media",
+      "Sumarlo para obtener el total de clientes",
+      "Usarlo como medida en un gráfico de barras"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#3-tipos-de-variables",
+      "label": "1.1.2 · Tipos de variables"
+     }
+    },
+    {
+     "id": "1.1.2-08",
+     "type": "single",
+     "stem": "¿Qué convierte una métrica, como el ticket medio, en un KPI?",
+     "explain": "Un KPI mide el progreso hacia un objetivo estratégico. La regla práctica: si no puedes decir quién es responsable de mejorar ese número, no es un KPI, es una métrica.",
+     "options": [
+      "Que esté ligada a un objetivo, con una meta y un responsable",
+      "Que se calcule cada día",
+      "Que aparezca en un dashboard",
+      "Que se exprese en porcentaje"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#dato-métrica-kpi",
+      "label": "1.1.2 · Dato, métrica, KPI"
+     }
+    },
+    {
+     "id": "1.1.2-09",
+     "type": "single",
+     "stem": "Barcelona ha superado su objetivo de ventas los seis meses del semestre, con cumplimientos de entre el 103,6 % y el 108,9 %. ¿Qué error en el KPI podría esconder?",
+     "explain": "Puede ser una tienda excelente, o pueden ser objetivos demasiado bajos. Si el KPI se cumple siempre, deja de decirnos nada. Es una pregunta para investigar, no una conclusión.",
+     "options": [
+      "Una meta mal calibrada: un objetivo que se supera sin esfuerzo deja de informar",
+      "Una fórmula ambigua",
+      "Un denominador equivocado",
+      "La media de porcentajes"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#7-errores-frecuentes-al-definir-kpis",
+      "label": "1.1.2 · Errores frecuentes al definir KPIs"
+     }
+    },
+    {
+     "id": "1.1.2-10",
+     "type": "single",
+     "stem": "Recibimos una hoja de Excel con una fila por tienda y una columna por mes (enero, febrero, marzo...) con las ventas. ¿Qué regla de los datos ordenados (<em>tidy data</em>) incumple?",
+     "explain": "En datos ordenados, cada columna es una variable, cada fila una observación y cada celda un único valor. Aquí \"mes\" es una variable cuyos valores se han convertido en nombres de columna. La forma ordenada tendría tres columnas: tienda, mes y ventas. En el bloque 3 aprenderemos a reorganizarla.",
+     "options": [
+      "Cada columna debe ser una variable: el mes es una variable y aquí está repartido en varias columnas",
+      "Cada celda debe contener un único valor",
+      "Cada fila debe ser una tienda",
+      "Ninguna: es la forma correcta de organizar los datos"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.2%20-%20Variables%2C%20dimensiones%2C%20medidas%20y%20KPIs.md#2-anatomía-de-un-dataset",
+      "label": "1.1.2 · Anatomía de un dataset"
+     }
+    }
+   ]
+  },
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "1.1.3-01",
+     "type": "match",
+     "stem": "¿Qué tipo de análisis pide cada pregunta de la dirección?",
+     "explain": "Descriptivo: ¿qué ha pasado? Diagnóstico: ¿por qué ha pasado? Predictivo: ¿qué va a pasar? Prescriptivo: ¿qué deberíamos hacer? Cada nivel se apoya en el anterior: primero se entiende qué pasó, después por qué, y solo entonces se intenta predecir o recomendar.",
+     "choices": [
+      "Descriptivo",
+      "Diagnóstico",
+      "Predictivo",
+      "Prescriptivo"
+     ],
+     "items": [
+      [
+       "\"¿Cuánto vendimos el mes pasado?\"",
+       0
+      ],
+      [
+       "\"¿Qué horario de verano deberíamos poner en cada tienda?\"",
+       3
+      ],
+      [
+       "\"¿Por qué cayeron las ventas en junio?\"",
+       1
+      ],
+      [
+       "\"¿Cuántos camareros necesitaremos en agosto?\"",
+       2
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#9-elegir-el-tipo-de-análisis-adecuado",
+      "label": "1.1.3 · Elegir el tipo de análisis adecuado"
+     }
+    },
+    {
+     "id": "1.1.3-02",
+     "type": "single",
+     "stem": "¿Cuál es la técnica principal del análisis diagnóstico?",
+     "explain": "El diagnóstico investiga las causas: desglosa la cifra global por tienda, categoría, canal o periodo, formula hipótesis y busca datos que las confirmen o las descarten.",
+     "options": [
+      "El desglose (<em>drill-down</em>): descomponer la cifra global por dimensiones hasta encontrar dónde se concentra la variación",
+      "Entrenar un modelo de machine learning",
+      "Calcular la media de cada mes",
+      "Optimizar los recursos con restricciones"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#4-análisis-diagnóstico-por-qué-ha-pasado",
+      "label": "1.1.3 · Análisis diagnóstico"
+     }
+    },
+    {
+     "id": "1.1.3-03",
+     "type": "single",
+     "stem": "Las ventas de Café Lumen cayeron un 5,8 % en junio. ¿Cuál fue la causa principal según el diagnóstico?",
+     "explain": "Desglosando por tienda, la caída se concentra en Lumen Campus, que perdió tres cuartas partes de sus ventas al acabar el curso. Era un efecto estacional <strong>previsto</strong> en el objetivo. El resto de la cadena crece un 1,7 %.",
+     "options": [
+      "El cierre del curso universitario, que hundió las ventas de Lumen Campus desde el 14 de junio",
+      "Que los clientes cambiaron el café por bebidas frías",
+      "Una subida de precios en toda la cadena",
+      "Que la app desplazó a los clientes de la barra"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#la-investigación-de-junio-paso-a-paso",
+      "label": "1.1.3 · La investigación de junio, paso a paso"
+     }
+    },
+    {
+     "id": "1.1.3-04",
+     "type": "single",
+     "stem": "En junio, en Café Lumen bajan las ventas de café y suben las de bebidas frías, y el ticket medio <strong>sube</strong>. ¿Cómo se explica?",
+     "explain": "El café cae, pero las bebidas frías compensan casi todo: no es una pérdida de clientes, sino un <strong>cambio de mezcla</strong> por el calor. Como cada bebida fría cuesta más, el ticket medio sube. Es información útil para la carta de verano y las compras.",
+     "options": [
+      "Es un cambio de mezcla: las bebidas frías son más caras que un café con leche",
+      "Se están perdiendo clientes",
+      "Ha subido el precio del café",
+      "Hay más tickets anulados"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#la-investigación-de-junio-paso-a-paso",
+      "label": "1.1.3 · La investigación de junio, paso a paso"
+     }
+    },
+    {
+     "id": "1.1.3-05",
+     "type": "single",
+     "stem": "¿Por qué comparar un mes con el anterior suele ser engañoso?",
+     "explain": "Las fiestas, los festivos o las vacaciones alteran un mes concreto (la Feria de Abril infló las ventas de mayo en Sevilla). Las comparaciones más informativas son <strong>contra el objetivo</strong> y <strong>contra el mismo periodo del año anterior</strong>.",
+     "options": [
+      "Porque mezcla la tendencia del negocio con los efectos del calendario: festivos, vacaciones, fiestas locales",
+      "Porque los meses no tienen el mismo número de tickets",
+      "Porque hay que comparar siempre años completos",
+      "No es engañoso: es la comparación más fiable"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#una-lección-de-método",
+      "label": "1.1.3 · Una lección de método"
+     }
+    },
+    {
+     "id": "1.1.3-06",
+     "type": "single",
+     "stem": "Con los datos de enero a junio, ¿podemos predecir con fiabilidad las ventas de Café Lumen en julio?",
+     "explain": "Un modelo predictivo necesita datos históricos que contengan los patrones que queremos predecir. Sin ningún verano no sabemos cómo se comportan las tiendas en julio y agosto. Un modelo entrenado con datos incompletos predice con seguridad cosas equivocadas.",
+     "options": [
+      "No: seis meses no contienen ningún verano, y un modelo extrapolaría la tendencia de primavera",
+      "Sí: seis meses son suficientes para cualquier modelo",
+      "Sí, si usamos un modelo de machine learning",
+      "Solo para las tiendas que no cierran en verano"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#podemos-predecir-las-ventas-de-café-lumen-en-julio",
+      "label": "1.1.3 · ¿Podemos predecir las ventas de Café Lumen en julio?"
+     }
+    },
+    {
+     "id": "1.1.3-07",
+     "type": "single",
+     "stem": "¿Qué combina un análisis prescriptivo, como decidir cuántas personas poner en cada turno?",
+     "explain": "Un modelo predictivo estima cuántos clientes llegarán; uno prescriptivo decide cuántas personas poner para no superar tres minutos de espera con el menor coste, respetando las restricciones laborales. El resultado no es un gráfico: es un cuadrante de turnos.",
+     "options": [
+      "Una predicción de lo que pasará en cada escenario y una optimización para elegir el mejor",
+      "Un desglose por dimensiones y una hipótesis",
+      "Un dashboard con alertas automáticas",
+      "La media histórica de cada turno"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#6-análisis-prescriptivo-qué-deberíamos-hacer",
+      "label": "1.1.3 · Análisis prescriptivo"
+     }
+    },
+    {
+     "id": "1.1.3-08",
+     "type": "single",
+     "stem": "Café Lumen tiene datos, pero nadie los resume de forma sistemática. ¿Cuál es el siguiente paso razonable en su madurez analítica?",
+     "explain": "Las organizaciones recorren los niveles en orden: descriptivo, diagnóstico, predictivo y prescriptivo. Café Lumen está antes del nivel 1. Subir de nivel exige datos, procesos, personas y herramientas, no solo técnica.",
+     "options": [
+      "Un informe mensual fiable y acumular un año de histórico",
+      "Un modelo de machine learning para predecir las ventas",
+      "Un sistema que fije los precios automáticamente",
+      "Contratar un equipo de Data Science"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#8-la-madurez-analítica",
+      "label": "1.1.3 · La madurez analítica"
+     }
+    },
+    {
+     "id": "1.1.3-09",
+     "type": "single",
+     "stem": "¿Podemos saber con el extracto de ventas si la app de Café Lumen trae ventas nuevas o solo desplaza a clientes que antes pedían en barra?",
+     "explain": "Que la app crezca no dice si las ventas son nuevas o desplazadas. Reconocer lo que los datos <strong>no pueden</strong> responder es tan valioso como responder lo que sí: un buen informe lo dice y propone qué datos habría que recoger.",
+     "options": [
+      "No: necesitaríamos el historial de cada cliente antes y después de la app, y la mayoría de las ventas en tienda no tienen <code>cliente_id</code>",
+      "Sí: basta con ver que las ventas de la app crecen cada mes",
+      "Sí: el ticket medio de la app es un 11 % menor",
+      "Sí, comparando la valoración media de cada canal"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%201%20-%20Fundamentos%20de%20Data%20Analytics/1.1%20-%20Fundamentos/1.1.3%20-%20Tipos%20de%20an%C3%A1lisis.md#7-está-funcionando-la-app-los-cuatro-tipos-en-una-misma-pregunta",
+      "label": "1.1.3 · ¿Está funcionando la app?"
+     }
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

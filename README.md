@@ -32,8 +32,9 @@ En cada bloque se trabaja con un dataset distinto, para ver problemas y dominios
 1. **Antes de la primera clase, completa el bloque 0.** Deja instaladas las herramientas (terminal, Git, VS Code, Python y PostgreSQL) y crea tu repositorio `mi-portfolio-data-analytics`, donde guardarás todas las prácticas.
 2. **En cada sesión, lee la guía y haz la práctica.** La guía explica los conceptos sobre el caso del bloque, y la práctica se guarda en tu portfolio, en `practicas/bloque-XX/`. Al terminarla, compárala con su archivo resuelto, que está junto a la guía.
 3. **Después, resuelve los ejercicios.** Están al final de cada guía, con sus soluciones. Desde el bloque 3, cada sesión trae además un cuaderno `<sesión> - Ejercicios.ipynb` para resolverlos en Jupyter.
-4. **Consulta el [glosario](Recursos/Glosario.md) cuando te encuentres un término que no recuerdes.** Cada definición enlaza con la sesión donde se explica.
-5. **Al terminar los nueve bloques, haz el proyecto final.** Reúne todo el curso en un único caso de negocio y sirve para evaluarlo.
+4. **Al terminar cada subbloque, haz su [autoevaluación](https://javierfdc.github.io/DataAnalytics_Handbook/Recursos/autoevaluaciones/).** Son diez preguntas que se corrigen al momento y cambian en cada intento. Si fallas alguna, la corrección te dice qué sesión repasar.
+5. **Consulta el [glosario](Recursos/Glosario.md) cuando te encuentres un término que no recuerdes.** Cada definición enlaza con la sesión donde se explica.
+6. **Al terminar los nueve bloques, haz el proyecto final.** Reúne todo el curso en un único caso de negocio y sirve para evaluarlo.
 
 ---
 
@@ -281,6 +282,7 @@ Proyecto individual que se desarrolla de forma autónoma, fuera de las sesiones.
 
 *Información adicional para el alumno. No forma parte de las sesiones ni de la evaluación del curso.*
 
+- **[Autoevaluaciones](https://javierfdc.github.io/DataAnalytics_Handbook/Recursos/autoevaluaciones/)**: una por subbloque, para comprobar si dominas lo visto antes de seguir. Se hacen en el navegador, se corrigen al momento y cada intento trae preguntas distintas. Cada corrección enlaza con la sesión que conviene repasar.
 - **[Glosario](Recursos/Glosario.md)**: definiciones breves de los términos del curso, agrupadas por bloque y con enlace a la sesión donde se explica cada uno. Crece a medida que avanza el curso.
 - **[Certificaciones profesionales](Recursos/Certificaciones%20profesionales.md)**: las certificaciones oficiales del mercado que se corresponden con cada bloque del curso (SQL, Python, cloud, IA, gobierno del dato, Power BI, Tableau y Qlik). Incluye precios, formato del examen, vigencia y el orden recomendado para certificarse.
 
@@ -304,7 +306,7 @@ Proyecto individual que se desarrolla de forma autónoma, fuera de las sesiones.
 data-analytics-handbook/
 ├── README.md
 ├── LICENSE                                           ← texto legal de la licencia CC BY-NC-SA 4.0
-├── Recursos/                                         ← glosario y certificaciones profesionales
+├── Recursos/                                         ← glosario, certificaciones y autoevaluaciones
 ├── Bloque 0 - Puesta a punto/
 │   └── 0.1 - Herramientas del curso/                 ← sesiones 0.1.x
 ├── Bloque 1 - Fundamentos de Data Analytics/

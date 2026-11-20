@@ -1,0 +1,104 @@
+/* Estilos comunes de las autoevaluaciones del Data Analytics Handbook */
+:root {
+  --bg: #f7f7f5; --card: #ffffff; --text: #1f2328; --muted: #59636e;
+  --border: #d8dee4; --accent: #2f6fdb; --accent-soft: #e8f0fd;
+  --ok: #1a7f37; --ok-soft: #e6f4ea; --ko: #c62828; --ko-soft: #fdecea;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115; --card: #171a21; --text: #e6e8eb; --muted: #9aa4b1;
+    --border: #2c313a; --accent: #6ea0ff; --accent-soft: #1c2740;
+    --ok: #4cc26a; --ok-soft: #13291b; --ko: #ff6b6b; --ko-soft: #321818;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+a { color: var(--accent); }
+code {
+  font-family: ui-monospace, Consolas, monospace; font-size: .9em;
+  background: var(--accent-soft); padding: 1px 5px; border-radius: 4px;
+}
+pre {
+  background: var(--accent-soft); border-radius: 8px; padding: 12px 14px;
+  overflow-x: auto; margin: 0 0 12px; line-height: 1.45;
+}
+pre code { background: none; padding: 0; font-size: .88rem; }
+.kicker { color: var(--muted); font-size: .9rem; margin: 0; }
+h1 { font-size: 1.6rem; line-height: 1.25; margin: 4px 0 8px; }
+.nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: .95rem; }
+.intro { color: var(--muted); }
+
+/* Marcador fijo */
+.score {
+  position: sticky; top: 0; z-index: 10; background: var(--bg);
+  padding: 10px 0; margin-bottom: 8px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px; font-size: .95rem;
+}
+.bar { flex: 1; height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.bar > div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+
+/* Preguntas */
+.q {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px 20px; margin: 16px 0;
+}
+.q.ok { border-color: var(--ok); }
+.q.ko { border-color: var(--ko); }
+.q h2 { font-size: 1rem; margin: 0 0 4px; color: var(--muted); font-weight: 600; }
+.q .stem { margin: 0 0 12px; }
+.opt {
+  display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px;
+  border: 1px solid var(--border); border-radius: 8px; margin: 6px 0; cursor: pointer;
+}
+.opt:hover { background: var(--accent-soft); }
+.opt input { margin-top: 5px; }
+.opt.correct { border-color: var(--ok); background: var(--ok-soft); }
+.opt.wrong { border-color: var(--ko); background: var(--ko-soft); }
+.match { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; }
+.match select {
+  font: inherit; padding: 6px 8px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--card); color: var(--text);
+}
+.match select.correct { border-color: var(--ok); background: var(--ok-soft); }
+.match select.wrong { border-color: var(--ko); background: var(--ko-soft); }
+.fix { grid-column: 1 / -1; font-size: .85rem; color: var(--ko); margin-top: -4px; }
+button {
+  font: inherit; font-weight: 600; cursor: pointer; border-radius: 8px;
+  padding: 8px 16px; border: 1px solid var(--accent); background: var(--accent); color: #fff;
+}
+button:disabled { opacity: .45; cursor: default; }
+button.secondary { background: transparent; color: var(--accent); }
+.actions { margin-top: 14px; }
+.feedback { margin-top: 14px; padding: 12px 14px; border-radius: 8px; }
+.feedback.ok { background: var(--ok-soft); }
+.feedback.ko { background: var(--ko-soft); }
+.feedback .verdict { font-weight: 700; }
+.feedback.ok .verdict { color: var(--ok); }
+.feedback.ko .verdict { color: var(--ko); }
+.feedback p { margin: 6px 0; }
+
+/* Resultado final */
+.result {
+  background: var(--card); border: 2px solid var(--accent); border-radius: 10px;
+  padding: 20px; margin-top: 24px; display: none;
+}
+.result.show { display: block; }
+.result .big { font-size: 2rem; font-weight: 700; margin: 0; }
+
+/* Portada */
+.list { list-style: none; padding: 0; }
+.list li {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  margin: 10px 0;
+}
+.list a { display: block; padding: 14px 18px; text-decoration: none; color: var(--text); }
+.list a:hover { background: var(--accent-soft); border-radius: 10px; }
+.list .sub { color: var(--muted); font-size: .9rem; }
+.list li.soon { color: var(--muted); padding: 14px 18px; }
+.block { margin-top: 28px; font-size: 1.1rem; }
+
+footer { color: var(--muted); font-size: .85rem; font-style: italic; margin-top: 32px; text-align: center; }

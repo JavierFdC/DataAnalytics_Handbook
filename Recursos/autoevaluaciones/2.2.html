@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoevaluación 2.2 · Data Analytics Handbook</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<main id="app"></main>
+<!-- Generado con el banco de preguntas: no editar a mano -->
+<script>
+const CONFIG = {
+ "id": "2.2",
+ "title": "SQL intermedio",
+ "block": "Bloque 2 - SQL y bases de datos",
+ "caseName": "Casa Olivo",
+ "readme": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/README.md#bloque-2--sql-y-bases-de-datos",
+ "nextStep": "al bloque 3",
+ "rules": [
+  {
+   "count": 4,
+   "pool": [
+    {
+     "id": "2.2.1-01",
+     "type": "match",
+     "stem": "Según lo que devuelve una subconsulta, ¿dónde se usa?",
+     "explain": "Una subconsulta es una pregunta previa: SQL la responde primero y usa la respuesta en la consulta de fuera. Si devuelve un valor, va donde iría un valor (<code>subtotal &gt; (SELECT AVG(subtotal) ...)</code>); si devuelve una lista, va con <code>IN</code> o <code>EXISTS</code>; si devuelve una tabla, va en el <code>FROM</code> como tabla derivada.",
+     "choices": [
+      "Con <code>IN</code> o <code>EXISTS</code>",
+      "En el <code>FROM</code>, con un alias",
+      "Donde iría un valor: en el <code>WHERE</code> o en el <code>SELECT</code>"
+     ],
+     "items": [
+      [
+       "Un valor (una fila y una columna)",
+       2
+      ],
+      [
+       "Una lista (una columna y varias filas)",
+       0
+      ],
+      [
+       "Una tabla (varias filas y columnas)",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#tres-formas-de-resultado-tres-lugares",
+      "label": "2.2.1 · Tres formas de resultado, tres lugares"
+     }
+    },
+    {
+     "id": "2.2.1-02",
+     "type": "single",
+     "stem": "Para contar los clientes que han comprado las sábanas de percal (producto 203), una subconsulta con <code>IN</code> da 347 y un <code>INNER JOIN</code> de <code>clientes</code>, <code>pedidos</code> y <code>lineas_pedido</code> da 358. ¿Por qué?",
+     "explain": "Es la trampa de la cardinalidad de la 2.1.3: el <code>JOIN</code> devuelve una fila por cada línea con sábanas, y un cliente que las compró dos veces aparece dos veces. <code>IN</code> <strong>nunca repite filas</strong> de la consulta principal: un cliente está en la lista o no. Con el <code>JOIN</code> habría que usar <code>COUNT(DISTINCT c.cliente_id)</code>.",
+     "options": [
+      "Once clientes compraron las sábanas en más de un pedido y el <code>JOIN</code> los repite",
+      "El <code>JOIN</code> incluye los pedidos devueltos y el <code>IN</code> no",
+      "El <code>IN</code> descarta los clientes sin fecha de nacimiento",
+      "Las subconsultas redondean los resultados"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#3-subconsultas-que-devuelven-una-lista-in-y-not-in",
+      "label": "2.2.1 · Subconsultas con IN y NOT IN"
+     }
+    },
+    {
+     "id": "2.2.1-03",
+     "type": "single",
+     "stem": "Una consulta con <code>WHERE x NOT IN (SELECT ...)</code> no devuelve ninguna fila, y debería. La subconsulta devuelve una columna que admite <code>NULL</code>. ¿Qué ocurre?",
+     "explain": "<code>3 NOT IN (1, 2, NULL)</code> significa \"distinto de 1, y de 2, y de <code>NULL</code>\", y la última comparación da \"desconocido\". El <code>WHERE</code> descarta todas las filas, <strong>sin error y sin aviso</strong>. La regla: con <code>NOT IN</code>, la columna de la subconsulta no debe admitir <code>NULL</code>; si los admite, usamos <code>NOT EXISTS</code>.",
+     "options": [
+      "Si la lista contiene un <code>NULL</code>, la condición da \"desconocido\" en todas las filas",
+      "<code>NOT IN</code> no admite subconsultas, solo listas escritas a mano",
+      "La subconsulta devuelve demasiadas filas",
+      "Hay que escribir <code>NOT IN</code> en minúsculas"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#la-trampa-de-not-in-con-null",
+      "label": "2.2.1 · La trampa de NOT IN con NULL"
+     }
+    },
+    {
+     "id": "2.2.1-04",
+     "type": "single",
+     "stem": "¿Qué hace que esta subconsulta sea <strong>correlacionada</strong>?",
+     "explain": "La subconsulta usa <code>pr.categoria_id</code>, una columna <strong>de la consulta de fuera</strong>: su resultado depende de qué producto estemos mirando, así que conceptualmente se ejecuta una vez por cada fila. Gracias a eso compara cada producto con la media <strong>de su categoría</strong>. Los dos alias, <code>pr</code> y <code>p2</code>, sirven para distinguir las dos copias de la tabla, pero no son lo que la hace correlacionada.",
+     "code": "SELECT pr.nombre, pr.precio\nFROM productos AS pr\nWHERE pr.precio &gt; (SELECT AVG(p2.precio)\n                   FROM productos AS p2\n                   WHERE p2.categoria_id = pr.categoria_id);",
+     "options": [
+      "Que usa una columna de la consulta principal (<code>pr.categoria_id</code>) y no se puede ejecutar sola",
+      "Que usa una función de agregación (<code>AVG</code>)",
+      "Que la misma tabla aparece dentro y fuera de la subconsulta",
+      "Que va en el <code>WHERE</code> y no en el <code>FROM</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#subconsultas-correlacionadas",
+      "label": "2.2.1 · Subconsultas correlacionadas"
+     }
+    },
+    {
+     "id": "2.2.1-05",
+     "type": "single",
+     "stem": "Para encontrar el pedido más grande escribimos <code>SELECT * FROM pedidos WHERE subtotal = MAX(subtotal);</code>. ¿Por qué falla?",
+     "explain": "Cuando se evalúa el <code>WHERE</code>, todavía no se ha agregado nada. La subconsulta calcula el máximo en una consulta aparte: <code>WHERE subtotal = (SELECT MAX(subtotal) FROM pedidos)</code>. Además, no hay que escribir ninguna cifra a mano: si entran pedidos nuevos, el cálculo se actualiza solo.",
+     "options": [
+      "Una agregación no puede ir en el <code>WHERE</code>: hay que calcular el máximo en una subconsulta",
+      "<code>MAX</code> solo funciona con <code>GROUP BY</code>",
+      "Falta un alias para <code>MAX(subtotal)</code>",
+      "Hay que usar <code>IN</code> en lugar de <code>=</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#2-una-consulta-dentro-de-otra",
+      "label": "2.2.1 · Una consulta dentro de otra"
+     }
+    },
+    {
+     "id": "2.2.1-06",
+     "type": "single",
+     "stem": "¿Cuándo es verdadera la condición <code>EXISTS (SELECT 1 FROM pedidos AS p WHERE c.cliente_id = p.cliente_id)</code>?",
+     "explain": "A <code>EXISTS</code> no le importa qué columnas devuelve la subconsulta ni cuántas filas: solo si hay alguna. Por eso se escribe <code>SELECT 1</code>. Se lee como la pregunta (\"clientes para los que existe algún pedido\") y, a diferencia de un JOIN, no multiplica filas.",
+     "options": [
+      "Cuando la subconsulta devuelve al menos una fila: el cliente tiene algún pedido",
+      "Cuando la subconsulta devuelve el número 1",
+      "Cuando el cliente tiene exactamente un pedido",
+      "Cuando <code>cliente_id</code> no es <code>NULL</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#4-exists-y-not-exists-hay-alguna-fila-relacionada",
+      "label": "2.2.1 · EXISTS y NOT EXISTS"
+     }
+    },
+    {
+     "id": "2.2.1-07",
+     "type": "single",
+     "stem": "Para saber cuántos pedidos hace de media cada cliente escribimos <code>SELECT AVG(COUNT(*)) FROM pedidos GROUP BY cliente_id;</code> y da <code>aggregate function calls cannot be nested</code>. ¿Cómo se resuelve?",
+     "explain": "Hay que agregar dos veces: primero contar los pedidos de cada cliente y después hacer la media de esos recuentos. El primer paso va en una <strong>tabla derivada</strong>, <code>FROM (SELECT cliente_id, COUNT(*) AS pedidos ... GROUP BY cliente_id) AS por_cliente</code>, y la consulta principal calcula <code>AVG(pedidos)</code>: 1,73.",
+     "options": [
+      "Contando los pedidos de cada cliente en una subconsulta en el <code>FROM</code> y calculando la media fuera",
+      "Cambiando <code>AVG</code> por <code>SUM</code>",
+      "Quitando el <code>GROUP BY</code>",
+      "Añadiendo <code>HAVING COUNT(*) &gt; 0</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#en-el-from-agregar-dos-veces",
+      "label": "2.2.1 · En el FROM: agregar dos veces"
+     }
+    },
+    {
+     "id": "2.2.1-08",
+     "type": "single",
+     "stem": "En una consulta agrupada por categoría, el porcentaje se calcula dividiendo entre <code>(SELECT SUM(subtotal) FROM pedidos WHERE ...)</code>. ¿Qué devuelve esa subconsulta en cada fila del resultado?",
+     "explain": "La subconsulta no está correlacionada, así que no sabe nada del grupo en el que está: calcula siempre sobre toda la tabla. Es justo lo que queremos para el peso de cada categoría sobre el total. Para una media <strong>por categoría</strong> tendría que estar correlacionada.",
+     "options": [
+      "El mismo valor, el total de todas las categorías, en todas las filas",
+      "El total de la categoría de esa fila",
+      "Un valor distinto en cada fila, según el orden",
+      "Da error: no se puede usar una subconsulta con <code>GROUP BY</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.1%20-%20Subconsultas.md#en-el-select-el-peso-sobre-el-total",
+      "label": "2.2.1 · En el SELECT: el peso sobre el total"
+     }
+    }
+   ]
+  },
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "2.2.2-01",
+     "type": "single",
+     "stem": "¿Qué guarda una vista como <code>v_pedidos_validos</code>?",
+     "explain": "Una vista es una <strong>consulta guardada con nombre</strong> dentro de la base de datos. No guarda datos, sino la forma de calcularlos: si mañana entra un pedido nuevo, la vista ya lo incluye. Un CTE tampoco guarda datos, pero solo existe dentro de la consulta que lo define.",
+     "options": [
+      "La consulta que los calcula: los datos se leen de las tablas cada vez que se usa",
+      "Una copia de los pedidos válidos, que se actualiza cada noche",
+      "Un índice para que las consultas sobre pedidos vayan más rápido",
+      "Los pedidos válidos de la sesión actual, que desaparecen al cerrar pgAdmin"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#3-vistas-consultas-guardadas-con-nombre",
+      "label": "2.2.2 · Vistas: consultas guardadas con nombre"
+     }
+    },
+    {
+     "id": "2.2.2-02",
+     "type": "match",
+     "stem": "¿Qué herramienta usarías en cada caso?",
+     "explain": "Las tres dan a una consulta el papel de una tabla; cambia su alcance. La <strong>subconsulta</strong>, para un cálculo corto que se usa una vez. El <strong>CTE</strong>, para un análisis de varios pasos o un resultado intermedio que se usa varias veces en la misma consulta. La <strong>vista</strong>, para una definición de negocio que se repite en muchos análisis. La regla práctica: cuando copiamos el mismo CTE en varios scripts, lo convertimos en vista.",
+     "choices": [
+      "Subconsulta",
+      "CTE",
+      "Vista"
+     ],
+     "items": [
+      [
+       "Comparar cada pedido con el ticket medio, una sola vez, en un <code>WHERE</code>",
+       0
+      ],
+      [
+       "Un análisis de varios pasos dentro de un script",
+       1
+      ],
+      [
+       "La definición de las ventas netas, que usan muchos análisis y varias personas",
+       2
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#6-subconsulta-cte-o-vista",
+      "label": "2.2.2 · ¿Subconsulta, CTE o vista?"
+     }
+    },
+    {
+     "id": "2.2.2-03",
+     "type": "single",
+     "stem": "¿Cuál es la forma correcta de encadenar dos CTEs?",
+     "explain": "<code>WITH</code> va <strong>una sola vez</strong>, al principio, y los CTEs se separan con comas, sin coma después del último. Todo es una única sentencia, con un solo punto y coma al final: un punto y coma entre el <code>WITH</code> y la consulta haría que el CTE dejara de existir. Cada CTE puede usar los anteriores.",
+     "options": [
+      "<code>WITH a AS (...), b AS (...) SELECT ...</code>",
+      "<code>WITH a AS (...) WITH b AS (...) SELECT ...</code>",
+      "<code>WITH a AS (...); WITH b AS (...); SELECT ...</code>",
+      "<code>WITH a AS (...), b AS (...), SELECT ...</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#varios-ctes-encadenados",
+      "label": "2.2.2 · Varios CTEs encadenados"
+     }
+    },
+    {
+     "id": "2.2.2-04",
+     "type": "single",
+     "stem": "Con la vista <code>v_pedidos_validos</code>, las ventas netas son <code>SELECT SUM(subtotal) FROM v_pedidos_validos;</code>. ¿Qué ventaja tiene frente a repetir el filtro en cada consulta?",
+     "explain": "Es la \"única versión del número\" de la sesión 1.1.2, escrita en la base de datos. La consulta ya no necesita saber cuál es el criterio: la vista lo contiene. La contrapartida es que hay que saber que está: mezclar <code>pedidos</code> y <code>v_pedidos_validos</code> da cifras distintas.",
+     "options": [
+      "El criterio de exclusión está en un solo sitio: si cambia, se cambia en la vista y todas las consultas se actualizan",
+      "La vista guarda los resultados y la consulta es instantánea",
+      "La vista impide que se borren pedidos",
+      "Ninguna: solo ahorra escribir el <code>WHERE</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#la-vista-del-kpi",
+      "label": "2.2.2 · La vista del KPI"
+     }
+    },
+    {
+     "id": "2.2.2-05",
+     "type": "single",
+     "stem": "¿Por qué conviene nombrar las columnas al crear una vista, en lugar de usar <code>SELECT *</code>?",
+     "explain": "Una vista es un contrato con quien la usa: sus columnas deberían cambiar solo cuando lo decidimos. Nombrarlas, junto con el prefijo <code>v_</code>, son convenciones que hacen las vistas más fáciles de mantener.",
+     "options": [
+      "Para que la vista no cambie sin querer si alguien añade columnas a la tabla",
+      "Porque <code>SELECT *</code> no está permitido en una vista",
+      "Porque así la vista guarda menos datos",
+      "Porque así la vista se actualiza más deprisa"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#la-vista-del-kpi",
+      "label": "2.2.2 · La vista del KPI"
+     }
+    },
+    {
+     "id": "2.2.2-06",
+     "type": "single",
+     "stem": "Queremos quitar una columna de una vista y <code>CREATE OR REPLACE VIEW</code> da el error <code>cannot drop columns from view</code>. ¿Qué hacemos?",
+     "explain": "<code>CREATE OR REPLACE VIEW</code> solo puede <strong>añadir</strong> columnas al final; no puede quitar, renombrar ni cambiar el tipo de las que ya tiene. Borrar la vista no toca las tablas, porque la vista nunca tuvo datos propios.",
+     "options": [
+      "Borrar la vista con <code>DROP VIEW</code> y crearla de nuevo",
+      "Borrar la columna de la tabla original",
+      "Usar <code>ALTER TABLE</code> sobre la vista",
+      "Crear una vista materializada"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#modificar-y-borrar-vistas",
+      "label": "2.2.2 · Modificar y borrar vistas"
+     }
+    },
+    {
+     "id": "2.2.2-07",
+     "type": "single",
+     "stem": "Al volver a ejecutar <code>01_crear_tablas.sql</code> para recargar Casa Olivo, PostgreSQL da <code>cannot drop desired object(s) because other objects depend on them</code>. ¿Qué ocurre?",
+     "explain": "Al crear una vista, PostgreSQL apunta de qué tablas depende y no deja borrarlas: la vista se quedaría apuntando a la nada. Se borran las vistas, se ejecutan los dos scripts de carga y se vuelve a ejecutar el script de vistas. <code>DROP TABLE ... CASCADE</code> borraría también las vistas, pero solo conviene usarlo sabiendo exactamente qué se va a borrar.",
+     "options": [
+      "Hay vistas que dependen de las tablas: hay que borrar primero las vistas y crearlas de nuevo después de la carga",
+      "Los datos ya estaban cargados y la clave primaria lo impide",
+      "El script de creación tiene un error de sintaxis",
+      "Hay que ejecutar antes <code>02_insertar_datos.sql</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#10-errores-comunes-y-troubleshooting",
+      "label": "2.2.2 · Errores comunes y troubleshooting"
+     }
+    },
+    {
+     "id": "2.2.2-08",
+     "type": "single",
+     "stem": "Definimos un CTE con <code>WITH ventas_dia AS (...)</code>, ejecutamos la consulta y, en otra consulta posterior del mismo script, escribimos <code>SELECT * FROM ventas_dia;</code>. ¿Qué pasa?",
+     "explain": "Un CTE da nombre a un paso <strong>dentro de una consulta</strong> y desaparece con ella. Si queremos reutilizarlo en otras consultas, lo convertimos en vista, que sí queda guardada en la base de datos.",
+     "options": [
+      "Error: el CTE solo existe dentro de la sentencia que lo define",
+      "Devuelve las filas del CTE, que queda guardado hasta cerrar pgAdmin",
+      "Devuelve las filas del CTE, que queda guardado en la base de datos",
+      "Devuelve una tabla vacía"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#2-ctes-dar-nombre-a-cada-paso",
+      "label": "2.2.2 · CTEs: dar nombre a cada paso"
+     }
+    },
+    {
+     "id": "2.2.2-09",
+     "type": "single",
+     "stem": "¿En qué se diferencia una vista materializada de una vista normal?",
+     "explain": "Una vista normal se calcula cada vez que se consulta. Una materializada guarda el resultado, y sus datos son los del último <code>REFRESH MATERIALIZED VIEW</code>. Es la misma idea que el modo importación de Power BI o los extractos de Tableau: una copia rápida que hay que actualizar.",
+     "options": [
+      "Guarda el resultado: se consulta muy deprisa, pero no ve los datos nuevos hasta que se refresca",
+      "Es igual que una vista normal, pero con otro nombre",
+      "Solo existe mientras dura la consulta, como un CTE",
+      "No se puede consultar con <code>SELECT</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.2%20-%20Vistas%20y%20CTEs.md#vistas-materializadas",
+      "label": "2.2.2 · Vistas materializadas"
+     }
+    }
+   ]
+  },
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "2.2.3-01",
+     "type": "single",
+     "stem": "¿En qué se diferencia <code>SUM(subtotal) OVER ()</code> de <code>SUM(subtotal)</code> con <code>GROUP BY</code>?",
+     "explain": "Con <code>OVER</code>, la agregación se convierte en una <strong>función de ventana</strong>: calcula sobre un conjunto de filas y escribe el resultado en cada una, sin juntarlas. Los paréntesis vacíos significan que la ventana es todo el resultado. Por eso sirve para poner al lado de cada pedido qué parte del total supone.",
+     "options": [
+      "<code>OVER ()</code> deja cada fila en su sitio y le añade el total; <code>GROUP BY</code> junta las filas de cada grupo en una",
+      "No hay diferencia: son dos formas de escribir lo mismo",
+      "<code>OVER ()</code> solo funciona con <code>AVG</code>, no con <code>SUM</code>",
+      "<code>OVER ()</code> ignora los <code>NULL</code> y <code>GROUP BY</code> no"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#2-over-una-agregación-que-no-junta-filas",
+      "label": "2.2.3 · OVER: una agregación que no junta filas"
+     }
+    },
+    {
+     "id": "2.2.3-02",
+     "type": "match",
+     "stem": "Tres clientes empatan con 11 pedidos y el siguiente tiene 10. Ordenando por pedidos de mayor a menor, ¿qué puesto le da a ese cuarto cliente cada función?",
+     "explain": "<code>ROW_NUMBER()</code> numera sin repetir nunca: 1, 2, 3, 4. <code>RANK()</code> da el mismo puesto a los empatados y <strong>salta</strong> los siguientes: 1, 1, 1, 4, como en una carrera. <code>DENSE_RANK()</code> también repite el puesto, pero <strong>no salta</strong>: 1, 1, 1, 2. Con <code>ROW_NUMBER()</code>, el orden entre empatados es arbitrario si no añadimos un desempate.",
+     "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "items": [
+      [
+       "<code>ROW_NUMBER()</code>",
+       3
+      ],
+      [
+       "<code>RANK()</code>",
+       3
+      ],
+      [
+       "<code>DENSE_RANK()</code>",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#4-rankings-row_number-rank-y-dense_rank",
+      "label": "2.2.3 · Rankings: ROW_NUMBER, RANK y DENSE_RANK"
+     }
+    },
+    {
+     "id": "2.2.3-03",
+     "type": "single",
+     "stem": "Queremos los tres productos más vendidos de cada categoría. Escribimos <code>WHERE ROW_NUMBER() OVER (PARTITION BY categoria ORDER BY ventas DESC) &lt;= 3</code> y da el error <code>window functions are not allowed in WHERE</code>. ¿Cómo se resuelve?",
+     "explain": "Las funciones de ventana se calculan <strong>después</strong> del <code>WHERE</code>, el <code>GROUP BY</code> y el <code>HAVING</code>, así que no se pueden usar en ninguno de ellos. Se calcula el ranking en un CTE, con un alias (<code>AS puesto</code>), y se filtra en la consulta principal. Es la forma estándar de obtener el top N de cada grupo.",
+     "options": [
+      "Calculando el ranking en un CTE y filtrando <code>puesto &lt;= 3</code> en la consulta siguiente",
+      "Pasando la condición al <code>HAVING</code>",
+      "Cambiando <code>ROW_NUMBER()</code> por <code>RANK()</code>",
+      "Quitando el <code>PARTITION BY</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#el-top-n-de-cada-grupo",
+      "label": "2.2.3 · El top N de cada grupo"
+     }
+    },
+    {
+     "id": "2.2.3-04",
+     "type": "single",
+     "stem": "La categoría Iluminación tiene 7 productos. ¿Cuántas filas devuelve esta consulta?",
+     "explain": "<code>PARTITION BY</code> forma grupos como <code>GROUP BY</code>, pero no junta las filas: cada fila conserva su detalle y ve solo las de su grupo. Por eso se puede poner el precio de cada lámpara al lado de la media de su categoría y calcular la diferencia.",
+     "code": "SELECT pr.nombre,\n       pr.precio,\n       AVG(pr.precio) OVER (PARTITION BY pr.categoria_id) AS media_categoria\nFROM productos AS pr\nWHERE pr.categoria_id = 5;",
+     "options": [
+      "7: una por producto, cada una con la media de su categoría",
+      "1: una por categoría",
+      "0: falta el <code>GROUP BY</code>",
+      "49: cada producto combinado con los demás"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#3-partition-by-una-ventana-por-grupo",
+      "label": "2.2.3 · PARTITION BY: una ventana por grupo"
+     }
+    },
+    {
+     "id": "2.2.3-05",
+     "type": "single",
+     "stem": "¿Qué calcula <code>SUM(subtotal) OVER (ORDER BY fecha_pedido, pedido_id)</code> sobre los pedidos de un cliente?",
+     "explain": "Con <code>ORDER BY</code> dentro del <code>OVER</code>, la ventana deja de ser todo el grupo y pasa a ser \"desde la primera fila hasta la actual\". La última fila llega al total del cliente. El <code>pedido_id</code> desempata dos pedidos del mismo día, que si no entrarían juntos en el acumulado.",
+     "options": [
+      "El gasto acumulado: en cada fila, la suma de ese pedido y todos los anteriores",
+      "El gasto total del cliente, repetido en todas las filas",
+      "El subtotal de cada pedido, ordenado por fecha",
+      "La diferencia con el pedido anterior"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#5-order-by-en-la-ventana-acumulados-y-medias-móviles",
+      "label": "2.2.3 · ORDER BY en la ventana"
+     }
+    },
+    {
+     "id": "2.2.3-06",
+     "type": "single",
+     "stem": "¿Qué marco de ventana calcula una media móvil de los tres últimos meses?",
+     "explain": "Las dos filas anteriores más la actual son tres meses. <code>3 PRECEDING</code> serían cuatro; <code>UNBOUNDED PRECEDING</code> es el acumulado desde el principio; y <code>1 PRECEDING AND 1 FOLLOWING</code> es una media centrada, que también suaviza pero usa el mes siguiente.",
+     "options": [
+      "<code>ROWS BETWEEN 2 PRECEDING AND CURRENT ROW</code>",
+      "<code>ROWS BETWEEN 3 PRECEDING AND CURRENT ROW</code>",
+      "<code>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code>",
+      "<code>ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#el-marco-de-la-ventana",
+      "label": "2.2.3 · El marco de la ventana"
+     }
+    },
+    {
+     "id": "2.2.3-07",
+     "type": "single",
+     "stem": "Calculamos los días entre cada compra y la anterior del mismo cliente con <code>fecha_pedido - LAG(fecha_pedido) OVER (PARTITION BY cliente_id ORDER BY fecha_pedido)</code>. La primera compra de cada cliente da <code>NULL</code>. ¿Es un error?",
+     "explain": "<code>LAG</code> mira a la fila anterior de la ventana, y la primera fila de cada partición no tiene anterior. Si queremos otro valor, <code>LAG</code> admite un tercer argumento por defecto: <code>LAG(ventas, 1, 0)</code>.",
+     "options": [
+      "No: la primera compra no tiene compra anterior, así que <code>LAG</code> devuelve <code>NULL</code>",
+      "Sí: falta un <code>GROUP BY cliente_id</code>",
+      "Sí: <code>LAG</code> no funciona con fechas",
+      "Sí: hay que cambiar <code>LAG</code> por <code>LEAD</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#cuánto-tarda-un-cliente-en-volver",
+      "label": "2.2.3 · Cuánto tarda un cliente en volver"
+     }
+    },
+    {
+     "id": "2.2.3-08",
+     "type": "single",
+     "stem": "Un acumulado de ventas mensuales debería volver a cero cada año, pero sigue sumando de un año a otro. ¿Qué falta?",
+     "explain": "Sin <code>PARTITION BY</code>, la ventana es todo el resultado y el acumulado no se reinicia nunca. Con <code>SUM(ventas) OVER (PARTITION BY anio ORDER BY mes)</code>, cada año empieza de cero.",
+     "options": [
+      "Un <code>PARTITION BY</code> por año dentro del <code>OVER</code>",
+      "Un <code>GROUP BY</code> por año al final de la consulta",
+      "Un <code>ORDER BY</code> fuera de la ventana",
+      "Un marco <code>ROWS BETWEEN 1 PRECEDING AND CURRENT ROW</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#3-partition-by-una-ventana-por-grupo",
+      "label": "2.2.3 · PARTITION BY: una ventana por grupo"
+     }
+    },
+    {
+     "id": "2.2.3-09",
+     "type": "single",
+     "stem": "Comparamos cada mes con el mismo mes del año anterior usando <code>LAG(ventas, 12) OVER (ORDER BY mes)</code>. ¿Qué riesgo tiene?",
+     "explain": "<code>LAG(ventas, 12)</code> es el valor de doce <strong>filas</strong> atrás. Si un mes no tiene ventas y no aparece, todo se desplaza. Antes de usarlo comprobamos que hay una fila por mes, o generamos la serie completa de meses.",
+     "options": [
+      "<code>LAG</code> cuenta filas, no meses: si falta algún mes en la serie, compara meses que no corresponden",
+      "<code>LAG</code> solo puede mirar una fila atrás",
+      "Devuelve el mes siguiente en lugar del anterior",
+      "Ninguno: siempre compara el mismo mes"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.2%20-%20SQL%20intermedio/2.2.3%20-%20Funciones%20de%20ventana%20y%20pr%C3%A1ctica%20guiada.md#6-lag-y-lead-mirar-a-la-fila-anterior",
+      "label": "2.2.3 · LAG y LEAD: mirar a la fila anterior"
+     }
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

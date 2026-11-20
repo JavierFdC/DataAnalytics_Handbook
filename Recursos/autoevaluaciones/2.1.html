@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoevaluación 2.1 · Data Analytics Handbook</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<main id="app"></main>
+<!-- Generado con el banco de preguntas: no editar a mano -->
+<script>
+const CONFIG = {
+ "id": "2.1",
+ "title": "Consultas básicas",
+ "block": "Bloque 2 - SQL y bases de datos",
+ "caseName": "Casa Olivo",
+ "readme": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/README.md#bloque-2--sql-y-bases-de-datos",
+ "nextStep": "al subbloque 2.2",
+ "rules": [
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "2.1.1-01",
+     "type": "single",
+     "stem": "En <code>lineas_pedido</code>, un pedido tiene varias líneas y un producto aparece en muchos pedidos. ¿Cuál es su clave primaria?",
+     "explain": "Ninguna columna sola identifica una fila: <code>pedido_id</code> se repite en cada línea del pedido y <code>producto_id</code>, en cada pedido que incluye el producto. La clave es la <strong>combinación</strong> de <code>pedido_id</code> y <code>num_linea</code>: una <strong>clave compuesta</strong>. Y <code>pedido_id</code>, además, es una clave foránea que apunta a <code>pedidos</code>.",
+     "options": [
+      "La combinación <code>pedido_id</code> + <code>num_linea</code>",
+      "<code>producto_id</code>",
+      "<code>pedido_id</code>",
+      "No tiene: las tablas de detalle no necesitan clave primaria"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#clave-primaria",
+      "label": "2.1.1 · Clave primaria"
+     }
+    },
+    {
+     "id": "2.1.1-02",
+     "type": "single",
+     "stem": "Hay 1.882 clientes sin fecha de nacimiento. ¿Cuántas filas devuelve esta consulta?",
+     "explain": "<code>NULL</code> no es igual a nada, ni siquiera a otro <code>NULL</code>: cualquier comparación con <code>NULL</code> da \"desconocido\", y el <code>WHERE</code> descarta esas filas. La consulta no da error, pero devuelve <strong>0 filas</strong>. Para preguntar por los vacíos se usa <code>WHERE fecha_nacimiento IS NULL</code>, que devuelve las 1.882.",
+     "code": "SELECT *\nFROM clientes\nWHERE fecha_nacimiento = NULL;",
+     "options": [
+      "0",
+      "1.882",
+      "Todas las de la tabla",
+      "Ninguna, porque da un error de sintaxis"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#null-el-valor-que-no-existe",
+      "label": "2.1.1 · NULL: el valor que no existe"
+     }
+    },
+    {
+     "id": "2.1.1-03",
+     "type": "single",
+     "stem": "Esta consulta da el error <code>column \"margen\" does not exist</code>. ¿Por qué?",
+     "explain": "El orden lógico de una consulta es <code>FROM</code> → <code>WHERE</code> → <code>SELECT</code>. Cuando se filtran las filas, la columna <code>margen</code> todavía no se ha calculado. Se repite la expresión en el filtro: <code>WHERE precio - coste &gt; 20</code>.",
+     "code": "SELECT nombre, precio - coste AS margen\nFROM productos\nWHERE margen &gt; 20;",
+     "options": [
+      "El <code>WHERE</code> se evalúa antes que el <code>SELECT</code>, cuando el alias todavía no existe",
+      "Los alias no pueden contener cálculos",
+      "Falta poner <code>margen</code> entre comillas simples",
+      "<code>precio</code> y <code>coste</code> son de tipos distintos y no se pueden restar"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#11-lo-que-hay-por-debajo-el-orden-en-que-se-ejecuta-una-consulta",
+      "label": "2.1.1 · El orden en que se ejecuta una consulta"
+     }
+    },
+    {
+     "id": "2.1.1-04",
+     "type": "single",
+     "stem": "¿Qué pedidos devuelve esta consulta?",
+     "explain": "<code>AND</code> se evalúa antes que <code>OR</code>, igual que la multiplicación va antes que la suma. Sin paréntesis devuelve 255 pedidos; con <code>(estado = 'Cancelado' OR estado = 'Devuelto') AND ...</code>, 118. La regla: siempre que mezclemos <code>AND</code> y <code>OR</code>, ponemos paréntesis.",
+     "code": "SELECT *\nFROM pedidos\nWHERE estado = 'Cancelado' OR estado = 'Devuelto' AND metodo_pago = 'Transferencia';",
+     "options": [
+      "Los cancelados con cualquier método de pago, más los devueltos pagados por transferencia",
+      "Los cancelados o devueltos, siempre que se pagaran por transferencia",
+      "Solo los cancelados pagados por transferencia",
+      "Ninguno: falta poner paréntesis y da error"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#combinar-condiciones-and-or-not",
+      "label": "2.1.1 · Combinar condiciones: AND, OR, NOT"
+     }
+    },
+    {
+     "id": "2.1.1-05",
+     "type": "single",
+     "stem": "¿Qué devuelve <code>SELECT * FROM clientes LIMIT 5;</code>?",
+     "explain": "Una tabla no tiene un orden garantizado. <code>LIMIT</code> solo recorta: sin <code>ORDER BY</code> devuelve filas cualesquiera, aunque con una tabla recién cargada coincidan con las primeras. Para un orden concreto, <code>ORDER BY</code>.",
+     "options": [
+      "Cinco filas cualesquiera de la tabla",
+      "Los cinco primeros clientes que se registraron",
+      "Los cinco clientes con el <code>cliente_id</code> más bajo",
+      "Los cinco últimos clientes añadidos"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#limit-echar-un-vistazo",
+      "label": "2.1.1 · LIMIT: echar un vistazo"
+     }
+    },
+    {
+     "id": "2.1.1-06",
+     "type": "single",
+     "stem": "<code>SELECT * FROM clientes WHERE provincia = 'madrid';</code> no devuelve ninguna fila, aunque hay 1.087 clientes de Madrid. ¿Por qué?",
+     "explain": "La comparación de textos distingue mayúsculas, minúsculas y tildes. Las comillas simples sí son las correctas para los valores de texto: las dobles se reservan para los nombres de columna. Para buscar sin distinguir mayúsculas, PostgreSQL ofrece <code>ILIKE</code>.",
+     "options": [
+      "La comparación de textos distingue mayúsculas: en la tabla está escrito <code>Madrid</code>",
+      "Los textos van entre comillas dobles, no simples",
+      "Falta un <code>LIMIT</code>",
+      "Hay que usar <code>IN</code> en lugar de <code>=</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#operadores-de-comparación",
+      "label": "2.1.1 · Operadores de comparación"
+     }
+    },
+    {
+     "id": "2.1.1-07",
+     "type": "match",
+     "stem": "¿A qué familia de SQL pertenece cada instrucción?",
+     "explain": "Por eso Casa Olivo llega en dos scripts: uno con la estructura (DDL) y otro con los datos (DML). El analista pasa la mayor parte del tiempo en la tercera familia, consultando datos que otros sistemas han escrito.",
+     "choices": [
+      "DDL (definir la estructura)",
+      "DML (cambiar los datos)",
+      "DQL (consultar)"
+     ],
+     "items": [
+      [
+       "<code>CREATE TABLE</code>",
+       0
+      ],
+      [
+       "<code>INSERT</code>",
+       1
+      ],
+      [
+       "<code>SELECT</code>",
+       2
+      ],
+      [
+       "<code>DELETE</code>",
+       1
+      ],
+      [
+       "<code>DROP TABLE</code>",
+       0
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#4-sql-el-lenguaje-de-las-bases-de-datos",
+      "label": "2.1.1 · SQL, el lenguaje de las bases de datos"
+     }
+    },
+    {
+     "id": "2.1.1-08",
+     "type": "single",
+     "stem": "¿Qué condición encuentra los productos cuyo nombre contiene \"lino\" en cualquier posición?",
+     "explain": "En <code>LIKE</code>, <code>%</code> significa \"cualquier texto, incluido ninguno\" y <code>_</code>, \"exactamente un carácter\". <code>'lino%'</code> solo encuentra los que <strong>empiezan</strong> por \"lino\". Con <code>=</code> no hay patrones: buscaría un nombre que fuera literalmente <code>%lino%</code>.",
+     "options": [
+      "<code>WHERE nombre LIKE '%lino%'</code>",
+      "<code>WHERE nombre LIKE 'lino%'</code>",
+      "<code>WHERE nombre LIKE '_lino_'</code>",
+      "<code>WHERE nombre = '%lino%'</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#in-between-y-like",
+      "label": "2.1.1 · IN, BETWEEN y LIKE"
+     }
+    },
+    {
+     "id": "2.1.1-09",
+     "type": "single",
+     "stem": "¿Qué pedidos incluye <code>WHERE fecha_pedido BETWEEN '2025-11-24' AND '2025-11-30'</code>?",
+     "explain": "<code>BETWEEN</code> incluye los dos extremos: equivale a <code>fecha_pedido &gt;= '2025-11-24' AND fecha_pedido &lt;= '2025-11-30'</code>. Es la semana del Black Friday: 285 pedidos.",
+     "options": [
+      "Los del 24 al 30 de noviembre, ambos días incluidos",
+      "Los del 25 al 29, sin los extremos",
+      "Los del 24 al 29: el último día queda fuera",
+      "Los del 25 al 30: el primer día queda fuera"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.1%20-%20Modelo%20relacional%2C%20SELECT%2C%20FROM%2C%20WHERE%20y%20AS.md#in-between-y-like",
+      "label": "2.1.1 · IN, BETWEEN y LIKE"
+     }
+    }
+   ]
+  },
+  {
+   "count": 4,
+   "pool": [
+    {
+     "id": "2.1.2-01",
+     "type": "single",
+     "stem": "<code>SELECT COUNT(*), COUNT(codigo_promo) FROM pedidos;</code> devuelve 6.974 y 1.935. ¿Por qué son distintos?",
+     "explain": "<code>COUNT(*)</code> cuenta filas; <code>COUNT(columna)</code>, las filas en las que la columna <strong>tiene valor</strong>. Solo 1.935 pedidos usaron un código. Todas las funciones de agregación ignoran los <code>NULL</code> salvo <code>COUNT(*)</code>: <code>AVG(columna)</code> es la media de los valores que existen, no de todas las filas. Para los distintos haría falta <code>COUNT(DISTINCT codigo_promo)</code>.",
+     "options": [
+      "<code>COUNT(columna)</code> solo cuenta las filas en las que esa columna no es <code>NULL</code>",
+      "<code>COUNT(codigo_promo)</code> cuenta los códigos distintos",
+      "<code>COUNT(*)</code> incluye los pedidos cancelados y <code>COUNT(codigo_promo)</code> no",
+      "Es un error de la base de datos: deberían coincidir"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#2-funciones-de-agregación",
+      "label": "2.1.2 · Funciones de agregación"
+     }
+    },
+    {
+     "id": "2.1.2-02",
+     "type": "match",
+     "stem": "En una consulta que agrupa los pedidos por cliente, ¿dónde va cada condición?",
+     "explain": "<code>WHERE</code> filtra <strong>filas</strong> antes de agrupar y no puede usar agregaciones. <code>HAVING</code> filtra <strong>grupos</strong> después de agrupar, así que es el sitio de las condiciones sobre <code>COUNT</code>, <code>SUM</code> o <code>AVG</code>. Cuando una condición puede ir en los dos sitios, va en el <code>WHERE</code>: es más claro y más rápido.",
+     "choices": [
+      "<code>WHERE</code>",
+      "<code>HAVING</code>"
+     ],
+     "items": [
+      [
+       "<code>estado NOT IN ('Cancelado', 'Devuelto')</code>",
+       0
+      ],
+      [
+       "<code>COUNT(*) &gt;= 8</code>",
+       1
+      ],
+      [
+       "<code>fecha_pedido &gt;= '2025-01-01'</code>",
+       0
+      ],
+      [
+       "<code>SUM(subtotal) &gt; 1000</code>",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#5-having-filtrar-grupos",
+      "label": "2.1.2 · HAVING: filtrar grupos"
+     }
+    },
+    {
+     "id": "2.1.2-03",
+     "type": "single",
+     "stem": "Para calcular el porcentaje de pedidos cancelados por transferencia (101 de 562) escribimos <code>100 * COUNT(*) FILTER (WHERE estado = 'Cancelado') / COUNT(*)</code>, y el resultado es 0. ¿Qué ha pasado?",
+     "explain": "Con enteros, PostgreSQL hace una <strong>división entera</strong> y descarta los decimales. Escribiendo <code>100.0</code> en lugar de <code>100</code>, el cálculo se hace con decimales y da 18,0 %: casi uno de cada cinco pedidos pagados por transferencia se cancela.",
+     "options": [
+      "Todos los operandos son enteros y PostgreSQL hace una división entera",
+      "<code>FILTER</code> no funciona dentro de una división",
+      "Falta un <code>GROUP BY estado</code>",
+      "Hay que redondear con <code>ROUND</code> antes de dividir"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#6-filter-contar-una-parte-dentro-de-cada-grupo",
+      "label": "2.1.2 · FILTER: contar una parte dentro de cada grupo"
+     }
+    },
+    {
+     "id": "2.1.2-04",
+     "type": "single",
+     "stem": "Las ventas netas fueron 167.624 € en 2024 y 296.758 € en 2025, un 77 % más. ¿Por qué esa comparación es engañosa?",
+     "explain": "Antes de comparar dos totales, comprobamos que miden lo mismo. Comparando los mismos meses, de marzo a diciembre, las ventas crecen un <strong>54 %</strong>, no un 77 %. Y como el ticket medio apenas cambia, Casa Olivo crece porque tiene más pedidos, no porque cada pedido sea mayor.",
+     "options": [
+      "Porque la tienda abrió en marzo de 2024: compara diez meses con doce",
+      "Porque no descuenta la inflación",
+      "Porque incluye los pedidos enviados que aún no se han entregado",
+      "No es engañosa: es la forma correcta de comparar dos años"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#7-leer-los-resultados-con-criterio",
+      "label": "2.1.2 · Leer los resultados con criterio"
+     }
+    },
+    {
+     "id": "2.1.2-05",
+     "type": "single",
+     "stem": "Esta consulta da un error. ¿Por qué?",
+     "explain": "Con <code>GROUP BY</code>, cada columna del <code>SELECT</code> tiene que estar en el <code>GROUP BY</code> o ser una agregación. El grupo <em>Cancelado</em> tiene pedidos con cuatro métodos de pago: PostgreSQL no puede elegir cuál poner en su única fila. Si lo añadimos al <code>GROUP BY</code>, sale un grupo por cada combinación.",
+     "code": "SELECT estado, metodo_pago, COUNT(*)\nFROM pedidos\nGROUP BY estado;",
+     "options": [
+      "<code>metodo_pago</code> no está en el <code>GROUP BY</code> ni dentro de una agregación",
+      "<code>COUNT(*)</code> necesita un alias",
+      "No se puede agrupar por una columna de texto",
+      "Falta un <code>ORDER BY</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#la-regla-de-oro-de-group-by",
+      "label": "2.1.2 · La regla de oro de GROUP BY"
+     }
+    },
+    {
+     "id": "2.1.2-06",
+     "type": "single",
+     "stem": "Con <code>COUNT(DISTINCT cliente_id)</code> por año salen 1.596 clientes en 2024 y 2.889 en 2025, que suman 4.485. Pero en total han comprado 3.855 clientes distintos. ¿Por qué no coincide?",
+     "explain": "Un recuento de distintos <strong>no es aditivo</strong>: el total no es la suma de las partes. La diferencia, 630, son los clientes que compraron en 2024 y en 2025.",
+     "options": [
+      "Los clientes que compraron los dos años cuentan en cada año, pero una sola vez en el total",
+      "Hay pedidos sin <code>cliente_id</code>",
+      "<code>COUNT(DISTINCT ...)</code> redondea los resultados",
+      "Faltan los pedidos cancelados"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#agrupar-por-partes-de-una-fecha",
+      "label": "2.1.2 · Agrupar por partes de una fecha"
+     }
+    },
+    {
+     "id": "2.1.2-07",
+     "type": "single",
+     "stem": "¿Cuál es el orden lógico en que se ejecuta una consulta?",
+     "explain": "De este orden salen todas las reglas: una agregación no puede ir en el <code>WHERE</code>, porque los grupos se forman después; <code>HAVING</code> sí puede usarlas; los alias del <code>SELECT</code> no existen todavía en el <code>WHERE</code>, pero sí en el <code>ORDER BY</code>; y <code>LIMIT</code> recorta al final, después de ordenar.",
+     "options": [
+      "<code>FROM</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>SELECT</code> → <code>ORDER BY</code> → <code>LIMIT</code>",
+      "<code>SELECT</code> → <code>FROM</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>ORDER BY</code> → <code>LIMIT</code>",
+      "<code>FROM</code> → <code>SELECT</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>ORDER BY</code> → <code>LIMIT</code>",
+      "<code>FROM</code> → <code>GROUP BY</code> → <code>WHERE</code> → <code>HAVING</code> → <code>SELECT</code> → <code>LIMIT</code> → <code>ORDER BY</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#10-lo-que-hay-por-debajo-el-orden-completo-de-una-consulta",
+      "label": "2.1.2 · El orden completo de una consulta"
+     }
+    },
+    {
+     "id": "2.1.2-08",
+     "type": "single",
+     "stem": "En SQL estándar, ¿en qué cláusula se puede usar un alias definido en el <code>SELECT</code>, como <code>COUNT(*) AS clientes</code>?",
+     "explain": "El <code>ORDER BY</code> se ejecuta después del <code>SELECT</code>, así que el alias ya existe. En el <code>WHERE</code> y, en el SQL estándar, en el <code>HAVING</code> todavía no. PostgreSQL admite también los alias en el <code>GROUP BY</code>, pero es una comodidad que no todos los sistemas tienen.",
+     "options": [
+      "En el <code>ORDER BY</code>",
+      "En el <code>WHERE</code>",
+      "En el <code>HAVING</code>",
+      "En ninguna: los alias solo sirven para el nombre de la columna"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#4-order-by-y-limit-ordenar-y-quedarse-con-los-primeros",
+      "label": "2.1.2 · ORDER BY y LIMIT"
+     }
+    },
+    {
+     "id": "2.1.2-09",
+     "type": "single",
+     "stem": "Un top 10 de clientes por número de pedidos sale distinto cada vez que lo ejecutamos. ¿Qué ocurre?",
+     "explain": "Si varios clientes tienen los mismos pedidos, el orden entre ellos es arbitrario, y el corte del <code>LIMIT</code> puede caer en medio de un empate. Se añade un segundo criterio: <code>ORDER BY pedidos DESC, gasto DESC</code>.",
+     "options": [
+      "Hay empates en el criterio de orden y falta una columna para desempatar",
+      "<code>LIMIT</code> elige las filas al azar",
+      "Los datos cambian entre ejecuciones",
+      "<code>ORDER BY</code> no funciona con agregaciones"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.2%20-%20Agregaciones%2C%20agrupaci%C3%B3n%20y%20ordenaci%C3%B3n.md#4-order-by-y-limit-ordenar-y-quedarse-con-los-primeros",
+      "label": "2.1.2 · ORDER BY y LIMIT"
+     }
+    }
+   ]
+  },
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "2.1.3-01",
+     "type": "single",
+     "stem": "Queremos los clientes que nunca han hecho un pedido. Partimos de <code>FROM clientes AS c LEFT JOIN pedidos AS p ON c.cliente_id = p.cliente_id</code>. ¿Qué condición completa la consulta?",
+     "explain": "El <code>LEFT JOIN</code> conserva todos los clientes; los que no tienen pedidos vienen con las columnas de <code>pedidos</code> a <code>NULL</code>. Nos quedamos con esos: es el patrón <strong>anti-join</strong>, y devuelve 1.210 clientes. Se pregunta por <code>pedido_id</code> porque es la clave primaria de <code>pedidos</code> y nunca está vacía en una fila real. <code>= NULL</code> no funciona nunca, y <code>c.cliente_id</code> nunca es <code>NULL</code>.",
+     "options": [
+      "<code>WHERE p.pedido_id IS NULL</code>",
+      "<code>WHERE p.pedido_id = NULL</code>",
+      "<code>WHERE c.cliente_id IS NULL</code>",
+      "<code>WHERE p.pedido_id IS NOT NULL</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#el-patrón-lo-que-falta",
+      "label": "2.1.3 · El patrón \"lo que falta\""
+     }
+    },
+    {
+     "id": "2.1.3-02",
+     "type": "single",
+     "stem": "<code>SUM(p.subtotal)</code> después de <code>pedidos AS p INNER JOIN lineas_pedido AS l ON p.pedido_id = l.pedido_id</code> da 1.213.115 €, más del doble de los 503.468,32 € que suma <code>pedidos</code>. ¿Qué ha pasado?",
+     "explain": "Es la <strong>trampa de la cardinalidad</strong>. La relación es uno a muchos: tras el JOIN, cada fila es una línea, y un pedido de tres líneas aparece tres veces con el mismo <code>subtotal</code>. Sumamos las medidas <strong>de la tabla más detallada</strong> (<code>cantidad * precio_unitario</code>) o no hacemos el JOIN si no nos hace falta.",
+     "options": [
+      "Cada pedido aparece una vez por cada línea, y su <code>subtotal</code> se suma varias veces",
+      "El <code>INNER JOIN</code> ha incluido pedidos cancelados que antes no estaban",
+      "Falta un <code>GROUP BY pedido_id</code>",
+      "El <code>subtotal</code> de <code>pedidos</code> y el de las líneas están en monedas distintas"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#5-la-trampa-de-la-cardinalidad",
+      "label": "2.1.3 · La trampa de la cardinalidad"
+     }
+    },
+    {
+     "id": "2.1.3-03",
+     "type": "single",
+     "stem": "Queremos cada cliente con sus pedidos de 2025, <strong>conservando</strong> a los que no compraron ese año. Esta consulta devuelve justo los pedidos de 2025, sin ningún cliente sin compras. ¿Cómo se arregla?",
+     "explain": "El <code>LEFT JOIN</code> conserva a los clientes sin pedidos con <code>fecha_pedido</code> a <code>NULL</code>, y después el <code>WHERE</code> los elimina, porque <code>NULL &gt;= '2025-01-01'</code> no es verdadero: el <code>LEFT JOIN</code> se ha convertido en un <code>INNER JOIN</code>. La condición sobre la tabla de la derecha va **en el <code>ON</code>**, que decide qué filas se corresponden.",
+     "code": "SELECT c.cliente_id, p.pedido_id\nFROM clientes AS c\nLEFT JOIN pedidos AS p\n       ON c.cliente_id = p.cliente_id\nWHERE p.fecha_pedido &gt;= '2025-01-01';",
+     "options": [
+      "Pasando la condición de la fecha al <code>ON</code>: <code>AND p.fecha_pedido &gt;= '2025-01-01'</code>",
+      "Cambiando el <code>LEFT JOIN</code> por un <code>RIGHT JOIN</code>",
+      "Añadiendo <code>OR p.fecha_pedido IS NOT NULL</code> al <code>WHERE</code>",
+      "Cambiando el <code>LEFT JOIN</code> por un <code>FULL JOIN</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#la-trampa-del-left-join-con-where",
+      "label": "2.1.3 · La trampa del LEFT JOIN con WHERE"
+     }
+    },
+    {
+     "id": "2.1.3-04",
+     "type": "match",
+     "stem": "Con las listas de emails de <code>clientes</code> y de <code>newsletter</code>, ¿qué operación responde cada pregunta?",
+     "explain": "Las operaciones de conjuntos ponen resultados uno debajo del otro. Para combinarlos, las consultas tienen que devolver el mismo número de columnas, con tipos compatibles y en el mismo orden. En <code>EXCEPT</code> importa el orden: <code>newsletter EXCEPT clientes</code> no es lo mismo que <code>clientes EXCEPT newsletter</code>.",
+     "choices": [
+      "<code>UNION</code>",
+      "<code>UNION ALL</code>",
+      "<code>INTERSECT</code>",
+      "<code>EXCEPT</code>"
+     ],
+     "items": [
+      [
+       "Clientes que están suscritos a la newsletter",
+       2
+      ],
+      [
+       "Suscriptores que todavía no son clientes",
+       3
+      ],
+      [
+       "Todos los contactos, sin repetir",
+       0
+      ],
+      [
+       "Las dos listas completas, una debajo de otra, con repetidos",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#6-operaciones-de-conjuntos-union-intersect-y-except",
+      "label": "2.1.3 · Operaciones de conjuntos"
+     }
+    },
+    {
+     "id": "2.1.3-05",
+     "type": "single",
+     "stem": "Casa Olivo tiene 5.244 clientes y 3.927 suscriptores a la newsletter, y 2.327 emails están en las dos listas. ¿Cuántas filas devuelve <code>SELECT email FROM clientes UNION SELECT email FROM newsletter</code>?",
+     "explain": "<code>UNION</code> elimina los duplicados: 5.244 + 3.927 − 2.327 = 6.844 contactos distintos. Con <code>UNION ALL</code> saldrían 9.171, porque los 2.327 emails comunes aparecerían dos veces.",
+     "options": [
+      "6.844",
+      "9.171",
+      "2.327",
+      "5.244"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#clientes-y-newsletter",
+      "label": "2.1.3 · Clientes y newsletter"
+     }
+    },
+    {
+     "id": "2.1.3-06",
+     "type": "single",
+     "stem": "Queremos el nombre de cada cliente suscrito <strong>y</strong> la fecha en que se dio de alta en la newsletter. ¿Qué usamos?",
+     "explain": "Las operaciones de conjuntos solo dicen <strong>qué elementos</strong> están en una lista, en otra o en ambas, y devuelven las columnas que comparten. Cuando el resultado necesita columnas de las dos tablas, hace falta un JOIN.",
+     "options": [
+      "Un <code>JOIN</code>, porque necesitamos columnas de las dos tablas",
+      "<code>INTERSECT</code>, porque buscamos los que están en las dos listas",
+      "<code>UNION</code>, porque combina las dos tablas",
+      "Una subconsulta con <code>LIMIT</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#join-u-operación-de-conjuntos",
+      "label": "2.1.3 · ¿JOIN u operación de conjuntos?"
+     }
+    },
+    {
+     "id": "2.1.3-07",
+     "type": "single",
+     "stem": "Una consulta que une <code>productos</code>, <code>categorias</code> y <code>clientes</code> da el error <code>column reference \"nombre\" is ambiguous</code>. ¿Cómo se resuelve?",
+     "explain": "La columna <code>nombre</code> existe en varias de las tablas unidas, y PostgreSQL no sabe a cuál nos referimos. Se cualifica con el alias de su tabla. Aunque no sea obligatorio, conviene cualificar todas las columnas: quien lea la consulta sabrá de dónde sale cada dato.",
+     "options": [
+      "Indicando de qué tabla es la columna con su alias, por ejemplo <code>pr.nombre</code>",
+      "Renombrando la columna en la tabla",
+      "Cambiando el <code>INNER JOIN</code> por un <code>LEFT JOIN</code>",
+      "Añadiendo <code>DISTINCT</code> al <code>SELECT</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#2-inner-join-unir-filas-correspondientes",
+      "label": "2.1.3 · INNER JOIN: unir filas correspondientes"
+     }
+    },
+    {
+     "id": "2.1.3-08",
+     "type": "single",
+     "stem": "¿Cuántas filas devuelve un <code>CROSS JOIN</code> entre las 6 categorías y los 4 métodos de pago?",
+     "explain": "<code>CROSS JOIN</code> combina cada fila de una tabla con cada fila de la otra: es el producto cartesiano, y no lleva <code>ON</code>. Sirve para construir rejillas completas, pero usado por error es peligroso: dos tablas de 10.000 filas dan 100 millones de combinaciones.",
+     "options": [
+      "24",
+      "10",
+      "6",
+      "4"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#4-right-full-y-cross-join",
+      "label": "2.1.3 · RIGHT, FULL y CROSS JOIN"
+     }
+    },
+    {
+     "id": "2.1.3-09",
+     "type": "single",
+     "stem": "¿A qué equivale <code>pedidos AS p RIGHT JOIN clientes AS c ON p.cliente_id = c.cliente_id</code>?",
+     "explain": "<code>A RIGHT JOIN B</code> es <code>B LEFT JOIN A</code>: conserva todas las filas de la tabla de la derecha. Casi nadie lo usa, porque se lee mejor una consulta en la que la tabla principal va en el <code>FROM</code> y todo lo demás se le añade con <code>LEFT JOIN</code>.",
+     "options": [
+      "A <code>clientes AS c LEFT JOIN pedidos AS p ON c.cliente_id = p.cliente_id</code>",
+      "A un <code>INNER JOIN</code> entre las dos tablas",
+      "A un <code>FULL JOIN</code> entre las dos tablas",
+      "A <code>pedidos AS p LEFT JOIN clientes AS c ON ...</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%202%20-%20SQL%20y%20bases%20de%20datos/2.1%20-%20Consultas%20b%C3%A1sicas/2.1.3%20-%20JOINs%20y%20teor%C3%ADa%20de%20conjuntos.md#4-right-full-y-cross-join",
+      "label": "2.1.3 · RIGHT, FULL y CROSS JOIN"
+     }
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>

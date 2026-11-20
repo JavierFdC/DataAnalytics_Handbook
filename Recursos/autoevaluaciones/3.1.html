@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoevaluación 3.1 · Data Analytics Handbook</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<main id="app"></main>
+<!-- Generado con el banco de preguntas: no editar a mano -->
+<script>
+const CONFIG = {
+ "id": "3.1",
+ "title": "Sintaxis y estructuras de datos",
+ "block": "Bloque 3 - Python para Data Analytics",
+ "caseName": "Pedalia",
+ "readme": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/README.md#bloque-3--python-para-data-analytics",
+ "nextStep": "al subbloque 3.2",
+ "rules": [
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "3.1.1-01",
+     "type": "single",
+     "stem": "Un notebook tiene tres celdas: la 1 contiene <code>x = 5</code>, la 2 contiene <code>x = x + 1</code> y la 3 contiene <code>print(x)</code>. Ejecutamos la 1, después <strong>dos veces</strong> la 2 y por último la 3. ¿Qué muestra?",
+     "explain": "Un notebook no se ejecuta de arriba abajo, sino en el orden en que pulsamos las celdas. Cada ejecución de la celda 2 suma 1 a lo que el kernel recuerda: 5 → 6 → 7. Lo que cuenta es la memoria del kernel, no lo que vemos en pantalla. Por eso, antes de dar un análisis por terminado, hacemos <strong>Restart</strong> y <strong>Run All</strong>.",
+     "options": [
+      "7",
+      "5",
+      "6",
+      "<code>NameError</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#cómo-funciona-un-notebook",
+      "label": "3.1.1 · Cómo funciona un notebook"
+     }
+    },
+    {
+     "id": "3.1.1-02",
+     "type": "match",
+     "stem": "¿Qué devuelve cada operación?",
+     "explain": "La <code>/</code> <strong>siempre</strong> devuelve un decimal. <code>//</code> da el cociente de la división entera y <code>%</code>, el resto. Si uno de los operandos es decimal, <code>//</code> también devuelve un decimal: <code>7.0 // 2</code> es <code>3.0</code>.",
+     "choices": [
+      "<code>1</code>",
+      "<code>3</code>",
+      "<code>3.5</code>",
+      "<code>3.0</code>"
+     ],
+     "items": [
+      [
+       "<code>7 / 2</code>",
+       2
+      ],
+      [
+       "<code>7 // 2</code>",
+       1
+      ],
+      [
+       "<code>7 % 2</code>",
+       0
+      ],
+      [
+       "<code>7.0 // 2</code>",
+       3
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#aritméticos",
+      "label": "3.1.1 · Operadores aritméticos"
+     }
+    },
+    {
+     "id": "3.1.1-03",
+     "type": "single",
+     "stem": "¿Qué devuelve <code>0.1 + 0.2 == 0.3</code>?",
+     "explain": "Un decimal de ordenador es una <strong>aproximación</strong>: ni 0,1 ni 0,2 se pueden guardar exactamente en binario, y la suma arrastra un error minúsculo. Por eso se redondea antes de comparar (<code>round(0.1 + 0.2, 2) == 0.3</code> da <code>True</code>) y antes de mostrar.",
+     "options": [
+      "<code>False</code>, porque <code>0.1 + 0.2</code> vale <code>0.30000000000000004</code>",
+      "<code>True</code>",
+      "Un <code>TypeError</code>, porque no se pueden comparar decimales",
+      "<code>0.3</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#los-decimales-no-siempre-son-exactos",
+      "label": "3.1.1 · Los decimales no siempre son exactos"
+     }
+    },
+    {
+     "id": "3.1.1-04",
+     "type": "match",
+     "stem": "¿Qué devuelve cada conversión?",
+     "explain": "<code>int</code> <strong>trunca</strong>, no redondea: para redondear, <code>round</code>. <code>bool(\"0\")</code> es <code>True</code> porque <code>\"0\"</code> es un texto que no está vacío. Y un texto con decimales no se convierte directamente en entero: habría que pasar antes por <code>float</code>.",
+     "choices": [
+      "<code>3</code>",
+      "<code>2.5</code>",
+      "<code>True</code>",
+      "<code>ValueError</code>"
+     ],
+     "items": [
+      [
+       "<code>int(3.9)</code>",
+       0
+      ],
+      [
+       "<code>float(\"2.5\")</code>",
+       1
+      ],
+      [
+       "<code>bool(\"0\")</code>",
+       2
+      ],
+      [
+       "<code>int(\"3.9\")</code>",
+       3
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#convertir-de-un-tipo-a-otro",
+      "label": "3.1.1 · Convertir de un tipo a otro"
+     }
+    },
+    {
+     "id": "3.1.1-05",
+     "type": "single",
+     "stem": "¿Qué guarda la variable <code>precio</code> después de <code>precio = 1,50</code>?",
+     "explain": "En Python los decimales se escriben con punto. La coma separa elementos, y lo que crea una tupla son las comas, no los paréntesis. No da error, pero no hace lo que esperamos: <code>precio = 1.50</code>.",
+     "options": [
+      "La tupla <code>(1, 50)</code>",
+      "El decimal <code>1.5</code>",
+      "El texto <code>'1,50'</code>",
+      "Nada: da un <code>SyntaxError</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#5-tipos-de-datos-básicos",
+      "label": "3.1.1 · Tipos de datos básicos"
+     }
+    },
+    {
+     "id": "3.1.1-06",
+     "type": "single",
+     "stem": "¿Qué muestra <code>print(f\"{9 / 24:.1%}\")</code>?",
+     "explain": "El formato <code>:.1%</code> multiplica por 100, añade el signo y deja un decimal. Python usa la notación anglosajona, con punto decimal; para el formato español hay que sustituir los caracteres, como veremos en la 3.1.2.",
+     "options": [
+      "<code>37.5%</code>",
+      "<code>0.4%</code>",
+      "<code>0.375</code>",
+      "<code>37,5 %</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#7-mostrar-resultados-print-y-f-strings",
+      "label": "3.1.1 · Mostrar resultados: print y f-strings"
+     }
+    },
+    {
+     "id": "3.1.1-07",
+     "type": "single",
+     "stem": "¿Qué ocurre al ejecutar este código?",
+     "explain": "<code>+</code> une dos textos, pero no un texto y un número. Habría que convertir el número con <code>str(capacidad)</code> o, mejor, usar una f-string, que convierte sola: <code>print(f\"Capacidad: {capacidad}\")</code>.",
+     "code": "capacidad = 24\nprint(\"Capacidad: \" + capacidad)",
+     "options": [
+      "<code>TypeError</code>: no se puede unir un texto y un número con <code>+</code>",
+      "Muestra <code>Capacidad: 24</code>",
+      "Muestra <code>Capacidad: capacidad</code>",
+      "Muestra <code>Capacidad: + 24</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#7-mostrar-resultados-print-y-f-strings",
+      "label": "3.1.1 · Mostrar resultados: print y f-strings"
+     }
+    },
+    {
+     "id": "3.1.1-08",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "Python permite encadenar comparaciones como en matemáticas: <code>0.2 &lt;= ocupacion &lt;= 0.8</code> equivale al <code>BETWEEN</code> de SQL, y 0,375 está en el rango. Y la comparación de textos distingue mayúsculas: <code>\"abonado\"</code> y <code>\"Abonado\"</code> son distintos.",
+     "code": "ocupacion = 9 / 24\nprint(0.2 &lt;= ocupacion &lt;= 0.8, \"abonado\" == \"Abonado\")",
+     "options": [
+      "<code>True False</code>",
+      "<code>True True</code>",
+      "<code>False False</code>",
+      "Un <code>SyntaxError</code>: no se pueden encadenar comparaciones"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#de-comparación",
+      "label": "3.1.1 · De comparación"
+     }
+    },
+    {
+     "id": "3.1.1-09",
+     "type": "match",
+     "stem": "¿De qué tipo es cada valor?",
+     "explain": "<code>\"24\"</code> es un texto, aunque contenga un número: los datos leídos de un archivo llegan así y hay que convertirlos. <code>None</code> es el <code>NULL</code> de Python, y se pregunta por él con <code>is None</code>.",
+     "choices": [
+      "<code>int</code>",
+      "<code>float</code>",
+      "<code>str</code>",
+      "<code>bool</code>",
+      "<code>NoneType</code>"
+     ],
+     "items": [
+      [
+       "<code>24</code>",
+       0
+      ],
+      [
+       "<code>1.50</code>",
+       1
+      ],
+      [
+       "<code>\"24\"</code>",
+       2
+      ],
+      [
+       "<code>True</code>",
+       3
+      ],
+      [
+       "<code>None</code>",
+       4
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.1%20-%20Entorno%2C%20tipos%20de%20datos%20y%20operadores.md#5-tipos-de-datos-básicos",
+      "label": "3.1.1 · Tipos de datos básicos"
+     }
+    }
+   ]
+  },
+  {
+   "count": 3,
+   "pool": [
+    {
+     "id": "3.1.2-01",
+     "type": "match",
+     "stem": "Con <code>estacion = \"Parque del Río\"</code>, ¿qué devuelve cada expresión?",
+     "explain": "Los índices empiezan en 0, y los negativos cuentan desde el final: <code>-1</code> es el último carácter. Un slice <code>[inicio:fin]</code> incluye <code>inicio</code> y <strong>excluye</strong> <code>fin</code>; si se omite el inicio, empieza desde el principio. <code>estacion[7:10]</code> va de la posición 7 a la 9: <code>'del'</code>.",
+     "choices": [
+      "<code>'P'</code>",
+      "<code>'o'</code>",
+      "<code>'Parque'</code>",
+      "<code>'del'</code>"
+     ],
+     "items": [
+      [
+       "<code>estacion[0]</code>",
+       0
+      ],
+      [
+       "<code>estacion[-1]</code>",
+       1
+      ],
+      [
+       "<code>estacion[:6]</code>",
+       2
+      ],
+      [
+       "<code>estacion[7:10]</code>",
+       3
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#slicing-trozos-de-un-texto",
+      "label": "3.1.2 · Slicing: trozos de un texto"
+     }
+    },
+    {
+     "id": "3.1.2-02",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "<code>sort()</code> ordena la lista <strong>en el sitio</strong> y devuelve <code>None</code>. Al guardar ese resultado en <code>duraciones</code>, perdemos la lista. Se usa <code>duraciones.sort()</code> a secas, o <code>duraciones = sorted(duraciones)</code>, que devuelve una lista nueva.",
+     "code": "duraciones = [47, 12, 75]\nduraciones = duraciones.sort()\nprint(duraciones)",
+     "options": [
+      "<code>None</code>",
+      "<code>[12, 47, 75]</code>",
+      "<code>[75, 47, 12]</code>",
+      "<code>[47, 12, 75]</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#ordenar",
+      "label": "3.1.2 · Ordenar"
+     }
+    },
+    {
+     "id": "3.1.2-03",
+     "type": "match",
+     "stem": "¿Qué estructura elegirías para guardar cada cosa?",
+     "explain": "Una <strong>lista</strong> guarda cosas en orden; un <strong>diccionario</strong>, con nombre; un <strong>set</strong>, cada cosa una sola vez. Una <strong>tupla</strong> es como una lista que no se puede modificar, útil para datos que van juntos y no cambian. Una fila es un diccionario; una tabla, una lista de diccionarios.",
+     "choices": [
+      "Lista",
+      "Tupla",
+      "Diccionario",
+      "Set"
+     ],
+     "items": [
+      [
+       "Las duraciones de los viajes de la mañana, en el orden en que se hicieron",
+       0
+      ],
+      [
+       "Los datos de una estación: nombre, capacidad y bicis ancladas",
+       2
+      ],
+      [
+       "Las estaciones que han tenido algún viaje, sin repetir",
+       3
+      ],
+      [
+       "Las coordenadas (latitud, longitud) de una estación, que no deben cambiar",
+       1
+      ]
+     ],
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#7-qué-estructura-elegir",
+      "label": "3.1.2 · Qué estructura elegir"
+     }
+    },
+    {
+     "id": "3.1.2-04",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "Los strings son <strong>inmutables</strong>: los métodos no cambian el texto original, sino que devuelven uno nuevo. Para quedarnos con el resultado hay que guardarlo: <code>nombre = nombre.title()</code>.",
+     "code": "nombre = \"plaza mayor\"\nnombre.title()\nprint(nombre)",
+     "options": [
+      "<code>plaza mayor</code>",
+      "<code>Plaza Mayor</code>",
+      "<code>PLAZA MAYOR</code>",
+      "<code>None</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#los-strings-no-se-pueden-modificar",
+      "label": "3.1.2 · Los strings no se pueden modificar"
+     }
+    },
+    {
+     "id": "3.1.2-05",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "<code>split</code> devuelve una lista de <strong>textos</strong>, y <code>+</code> entre dos textos los une. Para sumar hay que convertir antes: <code>int(partes[3]) + int(partes[4])</code> da 20. Es lo que hace por dentro cualquier programa que lee un CSV.",
+     "code": "linea = \"5;Hospital General;Norte;18;2\"\npartes = linea.split(\";\")\nprint(partes[3] + partes[4])",
+     "options": [
+      "<code>182</code>, el texto <code>\"18\"</code> seguido del texto <code>\"2\"</code>",
+      "<code>20</code>",
+      "<code>Norte18</code>",
+      "Un <code>TypeError</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#split-y-join-de-una-línea-de-texto-a-sus-campos",
+      "label": "3.1.2 · split y join"
+     }
+    },
+    {
+     "id": "3.1.2-06",
+     "type": "single",
+     "stem": "<code>estacion = {\"nombre\": \"Plaza Mayor\", \"bicis\": 9}</code>. ¿Qué devuelve <code>estacion.get(\"anclajes_rotos\", 0)</code>?",
+     "explain": "<code>get</code> devuelve el valor de la clave o, si no existe, el valor por defecto que le indiquemos (<code>None</code> si no indicamos ninguno). <code>estacion[\"anclajes_rotos\"]</code>, en cambio, daría <code>KeyError</code>. Para comprobar si una clave existe: <code>\"bicis\" in estacion</code>.",
+     "options": [
+      "<code>0</code>",
+      "<code>KeyError: 'anclajes_rotos'</code>",
+      "<code>None</code>",
+      "<code>9</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#claves-que-no-existen",
+      "label": "3.1.2 · Claves que no existen"
+     }
+    },
+    {
+     "id": "3.1.2-07",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "La diferencia de sets se queda con lo que está en el primero y no en el segundo, como el <code>EXCEPT</code> de SQL. <code>abonados - ocasionales</code> daría <code>{'Estación Central'}</code>, y <code>abonados &amp; ocasionales</code>, la intersección.",
+     "code": "abonados = {\"Plaza Mayor\", \"Estación Central\", \"Campus Universitario\"}\nocasionales = {\"Campus Universitario\", \"Parque del Río\", \"Plaza Mayor\"}\nprint(ocasionales - abonados)",
+     "options": [
+      "<code>{'Parque del Río'}</code>",
+      "<code>{'Estación Central'}</code>",
+      "<code>{'Campus Universitario', 'Plaza Mayor'}</code>",
+      "Un <code>TypeError</code>: los sets no se pueden restar"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#6-sets-conjuntos",
+      "label": "3.1.2 · Sets: conjuntos"
+     }
+    },
+    {
+     "id": "3.1.2-08",
+     "type": "single",
+     "stem": "¿Qué devuelve <code>\"parque del río\".title()</code>?",
+     "explain": "<code>title()</code> pone en mayúscula <strong>todas</strong> las palabras, también las preposiciones. Para respetarlas en minúscula hace falta una regla propia, que se puede escribir con un bucle en la 3.1.3.",
+     "options": [
+      "<code>'Parque Del Río'</code>",
+      "<code>'Parque del Río'</code>",
+      "<code>'Parque del río'</code>",
+      "<code>'PARQUE DEL RÍO'</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#métodos-de-los-strings",
+      "label": "3.1.2 · Métodos de los strings"
+     }
+    },
+    {
+     "id": "3.1.2-09",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "<code>divmod</code> devuelve una tupla con el cociente y el resto, <code>(1, 15)</code>, y el <strong>desempaquetado</strong> asigna cada elemento a una variable en una sola línea. <code>print</code> con dos argumentos los separa con un espacio.",
+     "code": "horas, mins = divmod(75, 60)\nprint(horas, mins)",
+     "options": [
+      "<code>1 15</code>",
+      "<code>1.25</code>",
+      "<code>(1, 15)</code>",
+      "<code>75 60</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.2%20-%20Strings%2C%20listas%2C%20tuplas%2C%20diccionarios%20y%20sets.md#4-tuplas",
+      "label": "3.1.2 · Tuplas"
+     }
+    }
+   ]
+  },
+  {
+   "count": 4,
+   "pool": [
+    {
+     "id": "3.1.3-01",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "Las condiciones se comprueban en orden y <strong>gana la primera que se cumple</strong>. 10 es menor o igual que 30, así que ningún viaje llegará nunca al <code>elif</code>. Las condiciones se ordenan de la más restrictiva a la más general: primero <code>&lt;= 15</code>, después <code>&lt;= 30</code>.",
+     "code": "minutos = 10\nif minutos &lt;= 30:\n    tipo = \"medio\"\nelif minutos &lt;= 15:\n    tipo = \"corto\"\nelse:\n    tipo = \"largo\"\nprint(tipo)",
+     "options": [
+      "<code>medio</code>",
+      "<code>corto</code>",
+      "<code>largo</code>",
+      "<code>corto</code> y <code>medio</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#la-estructura",
+      "label": "3.1.3 · Condiciones: if, elif y else"
+     }
+    },
+    {
+     "id": "3.1.3-02",
+     "type": "single",
+     "stem": "Con la tarifa de Pedalia (abonado: 30 minutos incluidos y 0,50 € por cada 30 minutos adicionales o fracción; 0,40 € de suplemento por bici eléctrica), ¿cuánto paga un <strong>abonado</strong> por un viaje de <strong>65 minutos</strong> en bici <strong>eléctrica</strong>?",
+     "explain": "Pasan 35 minutos de los 30 incluidos: un bloque completo de 30 y una fracción de 5, que cuenta como otro bloque. Son 2 × 0,50 = 1,00 €, más 0,40 € de suplemento: <strong>1,40 €</strong>. En código, la fracción se detecta con el resto: si <code>exceso % 30</code> no es cero, se suma un bloque.",
+     "options": [
+      "1,40 €",
+      "0,90 €",
+      "1,90 €",
+      "1,00 €"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#3-la-tarifa-con-condiciones",
+      "label": "3.1.3 · La tarifa, con condiciones"
+     }
+    },
+    {
+     "id": "3.1.3-03",
+     "type": "single",
+     "stem": "Queremos el total de minutos de los viajes. ¿Qué muestra este código?",
+     "explain": "El acumulador se inicializa <strong>dentro</strong> del bucle, así que vuelve a cero en cada vuelta y al final solo queda el último viaje. <code>total = 0</code> va antes del <code>for</code>. La sangría decide qué está dentro del bucle, y Python no avisa si una línea está en el nivel equivocado.",
+     "code": "viajes = [47, 12, 75]\nfor m in viajes:\n    total = 0\n    total += m\nprint(total)",
+     "options": [
+      "<code>75</code>",
+      "<code>134</code>",
+      "<code>0</code>",
+      "<code>47</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#patrones-dentro-de-un-bucle",
+      "label": "3.1.3 · Patrones dentro de un bucle"
+     }
+    },
+    {
+     "id": "3.1.3-04",
+     "type": "single",
+     "stem": "¿Qué devuelve esta comprehension?",
+     "explain": "Una comprehension se lee como un <code>SELECT ... FROM ... WHERE</code>: de cada <code>m</code> de la lista (<code>FROM</code>), <strong>si</strong> <code>m &gt; 10</code> (<code>WHERE</code>), toma <code>m * 2</code> (<code>SELECT</code>). Solo 12 y 30 pasan el filtro, y se duplican.",
+     "code": "[m * 2 for m in [5, 12, 30, 8] if m &gt; 10]",
+     "options": [
+      "<code>[24, 60]</code>",
+      "<code>[10, 24, 60, 16]</code>",
+      "<code>[12, 30]</code>",
+      "<code>[10, 16]</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#de-un-bucle-a-una-línea",
+      "label": "3.1.3 · De un bucle a una línea"
+     }
+    },
+    {
+     "id": "3.1.3-05",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "Detrás de un <code>if</code> puede ir cualquier valor. Son falsos el cero, el texto vacío, <code>None</code> y las <strong>colecciones vacías</strong> (<code>[]</code>, <code>{}</code>, <code>set()</code>); todo lo demás es verdadero. Por eso <code>if incidencias:</code> se lee como \"si hay incidencias\".",
+     "code": "incidencias = []\nif incidencias:\n    print(\"Hay incidencias pendientes\")\nelse:\n    print(\"Sin incidencias\")",
+     "options": [
+      "<code>Sin incidencias</code>",
+      "<code>Hay incidencias pendientes</code>",
+      "Un <code>TypeError</code>: un <code>if</code> necesita una comparación",
+      "Nada"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#valores-que-cuentan-como-verdaderos-o-falsos",
+      "label": "3.1.3 · Valores que cuentan como verdaderos o falsos"
+     }
+    },
+    {
+     "id": "3.1.3-06",
+     "type": "single",
+     "stem": "¿Qué números genera <code>range(30, 151, 30)</code>?",
+     "explain": "Con tres argumentos, <code>range</code> va desde el primero, sin llegar al segundo, con el tercero como paso. Como en el slicing, el final nunca se incluye; por eso se escribe 151 y no 150.",
+     "options": [
+      "30, 60, 90, 120 y 150",
+      "30, 60, 90 y 120",
+      "30, 60, 90, 120, 150 y 180",
+      "0, 30, 60, 90, 120 y 150"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#range-una-secuencia-de-números",
+      "label": "3.1.3 · range: una secuencia de números"
+     }
+    },
+    {
+     "id": "3.1.3-07",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "<code>zip</code> empareja las listas elemento a elemento y, si tienen distinta longitud, <strong>se detiene en la más corta sin avisar</strong>. Conviene comprobar antes que las longitudes coinciden.",
+     "code": "origenes = [\"Plaza Mayor\", \"Estación Central\", \"Campus Universitario\"]\nminutos = [14, 38]\nprint(list(zip(origenes, minutos)))",
+     "options": [
+      "<code>[('Plaza Mayor', 14), ('Estación Central', 38)]</code>",
+      "<code>[('Plaza Mayor', 14), ('Estación Central', 38), ('Campus Universitario', None)]</code>",
+      "Un <code>ValueError</code>: las listas tienen distinta longitud",
+      "<code>[('Plaza Mayor', 'Estación Central', 'Campus Universitario'), (14, 38)]</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#zip-recorrer-varias-listas-a-la-vez",
+      "label": "3.1.3 · zip: recorrer varias listas a la vez"
+     }
+    },
+    {
+     "id": "3.1.3-08",
+     "type": "single",
+     "stem": "¿Qué muestra este código?",
+     "explain": "<code>break</code> termina el bucle en cuanto se cumple la condición: al llegar a 75, el bucle acaba y el 64 ya no se mira. <code>continue</code>, en cambio, saltaría solo esa vuelta y seguiría con la siguiente.",
+     "code": "for m in [12, 38, 25, 75, 64]:\n    if m &gt; 60:\n        break\n    print(m)",
+     "options": [
+      "<code>12</code>, <code>38</code> y <code>25</code>",
+      "<code>75</code>",
+      "<code>12</code>, <code>38</code>, <code>25</code> y <code>64</code>",
+      "<code>75</code> y <code>64</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#break-y-continue",
+      "label": "3.1.3 · break y continue"
+     }
+    },
+    {
+     "id": "3.1.3-09",
+     "type": "single",
+     "stem": "¿Qué vale <code>tipo_bici</code>?",
+     "explain": "La <strong>expresión condicional</strong> elige entre dos valores: \"eléctrica si el código empieza por E; si no, mecánica\". Conviene usarla solo para casos así de simples; si hay más ramas, un <code>if</code> con <code>elif</code>.",
+     "code": "codigo_bici = \"M-0310\"\ntipo_bici = \"eléctrica\" if codigo_bici.startswith(\"E\") else \"mecánica\"",
+     "options": [
+      "<code>'mecánica'</code>",
+      "<code>'eléctrica'</code>",
+      "<code>True</code>",
+      "<code>False</code>"
+     ],
+     "answer": 0,
+     "review": {
+      "url": "https://github.com/JavierFdC/DataAnalytics_Handbook/blob/main/Bloque%203%20-%20Python%20para%20Data%20Analytics/3.1%20-%20Sintaxis%20y%20estructuras%20de%20datos/3.1.3%20-%20Control%20de%20flujo%2C%20bucles%20y%20comprehensions.md#condiciones-en-una-línea",
+      "label": "3.1.3 · Condiciones en una línea"
+     }
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="quiz.js"></script>
+</body>
+</html>
